@@ -155,14 +155,14 @@ export default function HomePage() {
       <section
         ref={heroRef}
         id="hero"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center overflow-hidden"
       >
 
 
         {/* Video Background */}
         <div className="absolute inset-0 z-10">
           <video
-            className="w-full h-full object-cover"
+            className="w-full h-[300px] md:h-[500px] lg:h-full object-cover"
             autoPlay
             loop
             muted
@@ -170,6 +170,8 @@ export default function HomePage() {
           >
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
           </video>
+          {/* Gradient Overlay for better text visibility on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
         </div>
 
 
