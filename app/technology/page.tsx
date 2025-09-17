@@ -35,15 +35,14 @@ const aircraftData = {
 const technologies = [
   {
     number: "01",
-    title: "Tilt Rotor",
+    title: "Tilt Rotor System",
     subtitle: "Switch. Snap. Send It",
-    description: "Handles multiple payloads with tilt-rotor precision",
+    description: "Advanced tilt-rotor technology enabling efficient E-VTOL operations with enhanced thrust and power optimization.",
     features: [
-      "Vertical takeoff and landing capability",
-      "Advanced maneuvers",
-      "Passenger vehicle (3 persons)",
-      "Cargo plane (up to 400kg)",
-      "All-weather systems",
+      "Provides True vertical takeoff/landing for 5–400 kg class eVTOLs",
+      "Combines with Variable-pitch props delivering 20% more thrust at 18% less power",
+      "Agile loiter and rapid transition between hover and cruise mode",
+      "All-weather operation with redundant actuator systems"
     ],
     image: "/tilt-rotor.png",
     imageSize: 600,
@@ -53,14 +52,14 @@ const technologies = [
   },
   {
     number: "02",
-    title: "Coaxial System",
+    title: "Coaxial Propulsion",
     subtitle: "Beast Mode Activated",
-    description: "Ultra-stable multi-rotor propulsion",
+    description: "High-performance single axis coaxial rotor configuration delivering superior lift stability, range, and mission redundancy.",
     features: [
-      "Advanced propulsion system that combines lift and efficiency",
-      "25% greater range than traditional",
-      "Coaxial rotor design for stability",
-      "Redundant safety in propulsion",
+      "Counter-rotating rotors for ultra-stable lift and maneuverability",
+      "25% greater range efficiency versus single-rotor layouts",
+      "Compact footprint enabling ship-deck and ship-borne launch",
+      "Auto-rotation redundancy for enhanced safety and mission reliability"
     ],
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/co-axial-6kjGtwyuxxYqYkFG8kh0J5kJi4vmIs.png",
     imageSize: 600,
@@ -69,15 +68,14 @@ const technologies = [
   },
   {
     number: "03",
-    title: "Modular Payload System",
+    title: "Modular Payload Architecture",
     subtitle: "Switch. Snap. Send It",
-    description: "Snap-on modules for various mission types",
+    description: "Flexible multi-role payload system with rapid reconfiguration for dynamic mission requirements.",
     features: [
-      "One aircraft, many missions, lower per-mission cost",
-      "Modular approach",
-      "Passenger vehicle (3 persons)",
-      "Cargo plane (up to 400 kg)",
-      "All-weather systems",
+      "Snap-in pods for cargo, medical, ISR, or loiter-munition roles",
+      "Rapid reconfiguration (<10 min) for multi-sortie workflows",
+      "Universal mounting interface across K-Series platforms",
+      "Sealed, all-weather enclosures with quick-release locks"
     ],
     image: "/modular-payload.png",
     imageSize: 350,
@@ -86,14 +84,14 @@ const technologies = [
   },
   {
     number: "04",
-    title: "Electric, Efficient, Upgradeable Energy System",
+    title: "Electric & Hybrid Energy Systems",
     subtitle: "Juiced Up & Ready",
-    description: "Battery + hybrid-ready modules, ultra-fast swapping",
+    description: "Scalable propulsion architecture supporting fast energy turnaround and next-gen hybrid compatibility.",
     features: [
-      "Designed for swift turnaround and future compatibility",
-      "High-energy batteries",
-      "Swap-time under 5 minutes",
-      "100% electric with hybrid-ready modules",
+      "Hot-swap battery and hybrid modules with <5 min turnaround",
+      "High-energy-density packs designed for 50–400 kg payloads",
+      "100% electric operation with plug-and-play generator compatibility",
+      "Future-proof architecture supporting next-gen hybrid energy systems"
     ],
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/electric-power-XkvzMPmnREFlFOqPqja2yPhySOkuOo.png",
     imageSize: 500,
@@ -102,15 +100,14 @@ const technologies = [
   },
   {
     number: "05",
-    title: "FleetOS: Intelligent Command & Control",
+    title: "FleetOS Command & Control",
     subtitle: "Brain of the Beast",
-    description: "Real-time operations, alerts, compliance",
+    description: "AI-driven C2 ecosystem offering real-time monitoring, predictive maintenance, and secured multi-aircraft control.",
     features: [
-      "Our proprietary software for real-time, safe, and efficient aircraft operations",
-      "Live telemetry",
-      "Real-time optimization",
-      "Predictive maintenance alerts",
-      "Regulatory compliance tracking",
+      "Live telemetry and health monitoring across multi-aircraft fleets",
+      "AI-driven flight path optimization in GNSS-challenged zones",
+      "Predictive maintenance alerts via digital twin analytics",
+      "Secure, over-the-air updates and encrypted C2 channels"
     ],
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fleet-os-XYF6mv2wcgYOK1H88TtbaO6g3goyv1.png",
     imageSize: 500,
@@ -119,15 +116,14 @@ const technologies = [
   },
   {
     number: "06",
-    title: "Designed for India",
+    title: "India-Optimized Design",
     subtitle: "Unstoppable. Unshakable.",
-    description: "Tailored to Indian terrain, climate, and weather",
+    description: "Indigenously engineered platform tailored for Indian terrain, weather, and regulatory compliance.",
     features: [
-      "Tailor-made for India's terrains, cities, and climate",
-      "74% local component sourcing",
-      "Aligned with DGCA & UDAN 5.0 norms",
-      "Tested across diverse Indian geographies",
-      "Weather, dust, and altitude resilient",
+      "Tailored to diverse Indian terrains, climates, and altitudes",
+      "74%+ local component sourcing under \"Make in India\" norms",
+      "DGCA & UDAN-compliant design, tested in monsoon, desert, mountain",
+      "Dust, heat, and humidity resilient composites and electronics"
     ],
     image: "/made-for-india.png",
     imageSize: 500,
@@ -180,17 +176,17 @@ export default function TechnologyPage() {
             <div className="flex items-center space-x-2">
               <img src="/images/kat-logo-white.png" alt="KAT Logo" width={60} height={60} className="object-contain" />
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Home
               </a>
-              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 About Us
               </a>
-              <a href="/technology" className="text-yellow-400 font-medium">
+              <a href="/technology" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 Technology
               </a>
-              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5 font-medium">
+              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
               </a>
             </div>

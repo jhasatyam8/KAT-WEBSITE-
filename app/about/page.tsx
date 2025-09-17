@@ -233,17 +233,17 @@ export default function AboutPage() {
             <div className="flex items-center space-x-2">
               <img src="/images/kat-logo-white.png" alt="KAT Logo" width={60} height={60} className="object-contain" />
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Home
               </a>
-              <a href="/about" className="text-yellow-400 font-medium">
+              <a href="/about" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 About Us
               </a>
-              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
               </a>
-              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5 font-medium">
+              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
               </a>
             </div>
@@ -266,30 +266,39 @@ export default function AboutPage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 text-center">
+      {/* About Us Section */}
+      <section className="pt-32">
         <div className="container mx-auto px-6">
-          <h1
-            className={`text-5xl md:text-7xl font-bold mb-6 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            ABOUT <span className="text-yellow-400">US</span>
-          </h1>
-          <p
-            className={`text-gray-400 text-xl max-w-3xl mx-auto transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            Pioneering the future of aerial mobility
-          </p>
+          <div className="text-center">
+            <h1
+              className={`text-5xl md:text-7xl font-bold mb-6 transition-all duration-1000 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+            >
+              ABOUT <span className="text-yellow-400">US</span>
+            </h1>
+            <p
+              className={`text-gray-400 text-xl max-w-3xl mx-auto mb-16 transition-all duration-1000 delay-300 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+            >
+              Pioneering the future of aerial mobility
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Company Description */}
-      <section className="py-20">
+      {/* Team Photo Section */}
+      <section className="pb-16">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="w-full flex items-center justify-center mb-16">
+            <img
+              src="/team-photo-new.png"
+              alt="K.A.T Team Photo"
+              className="w-full max-w-4xl h-auto object-contain rounded-lg shadow-2xl"
+            />
+          </div>
+          <div className="max-w-4xl mx-auto text-center mb-16">
             <p className="text-gray-300 text-lg leading-relaxed">
               Established in 2023, Khageshvara Aviation Technology Private Limited is at the forefront of innovation in
               aerial mobility. Our focus lies in developing cutting-edge Electric Vertical Take-Off and Landing (E-VTOL)
@@ -301,16 +310,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Photo and Title Section */}
-      <section className="py-16 overflow-hidden">
-        <div className="w-full flex items-center justify-center mb-12">
-          <img
-            src="/team-photo-new.png"
-            alt="K.A.T Team Photo"
-            className="w-full max-w-4xl h-auto object-contain rounded-lg shadow-2xl"
-          />
-        </div>
-
+      {/* Meet the Team Section */}
+      <section className="pb-8">
         <div className="container mx-auto px-6">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -324,7 +325,7 @@ export default function AboutPage() {
       </section>
 
       {/* Spacer to push team cards lower */}
-      <div className="h-32"></div>
+      <div className="h-16"></div>
 
       {/* Team Section with Column Parallax - Desktop Only */}
       <section className="pt-16 pb-20 hidden lg:block">

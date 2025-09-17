@@ -19,17 +19,17 @@ export default function CareerPage() {
             <div className="flex items-center space-x-2">
               <img src="/images/kat-logo-white.png" alt="KAT Logo" width={60} height={60} className="object-contain" />
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Home
               </a>
-              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 About Us
               </a>
-              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
               </a>
-              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5 font-medium">
+              <a href="/career" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 Career
               </a>
             </div>

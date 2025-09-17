@@ -109,6 +109,8 @@ export default function HomePage() {
     }
   }
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Navigation */}
@@ -118,21 +120,44 @@ export default function HomePage() {
             <div className="flex items-center space-x-2">
               <img src="/images/kat-logo-white.png" alt="KAT Logo" width={60} height={60} className="object-contain" />
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-yellow-400 font-medium">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="/" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 Home
               </a>
-              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 About Us
               </a>
-              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium">
+              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
               </a>
-              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5 font-medium">
+              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
               </a>
             </div>
+            {/* Social Icons */}
             <div className="flex items-center space-x-4">
+              {/* Mobile Menu Button */}
+              <button 
+                className="md:hidden p-2 text-yellow-400 hover:text-yellow-300 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMobileMenuOpen ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
               <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
                 <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
               </a>
@@ -145,6 +170,42 @@ export default function HomePage() {
                 rel="noopener noreferrer"
               >
                 <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          <div
+            className={`md:hidden transition-all duration-300 ease-in-out ${
+              isMobileMenuOpen
+                ? "max-h-64 opacity-100 mt-4"
+                : "max-h-0 opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="flex flex-col space-y-4 py-4">
+              <a
+                href="/"
+                className="text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Home
+              </a>
+              <a
+                href="/about"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                About Us
+              </a>
+              <a
+                href="/technology"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Technology
+              </a>
+              <a
+                href="/career"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Career
               </a>
             </div>
           </div>
@@ -174,6 +235,10 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
         </div>
 
+        {/* Bouncing Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+          <ChevronDown className="w-8 h-8 text-yellow-400" onClick={() => scrollToSection('mission-vision')} style={{ cursor: 'pointer' }} />
+        </div>
 
       </section>
 
@@ -290,9 +355,7 @@ export default function HomePage() {
                     <p className="text-white text-base md:text-lg leading-relaxed font-light font-sans">
                       Our vision is to lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways,
                       cutting aviation carbon emissions, and fostering sustainable growth:{" "}
-                      <span className="text-blue-300 font-semibold bg-blue-400/10 px-2 py-1 rounded border border-blue-400/50">
-                        'the forefront of next-gen mobility'.
-                      </span>
+                      <span className="text-blue-300 font-semibold bg-blue-400/10 px-2 py-1 rounded border border-blue-400/50 whitespace-nowrap inline-block">'the forefront of next-gen mobility'.</span>
                     </p>
                   </div>
                 </div>
@@ -729,9 +792,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Video Section */}
-      <section className="relative py-20">
+      {/* India's Flight Revolution Section */}
+      <section className="py-20 relative bg-[#121c2b]">
         <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-black mb-6 font-sans">
+              <span className="bg-gradient-to-r from-white via-white to-yellow-500 bg-clip-text text-transparent">INDIA'S FLIGHT</span>
+              <br />
+              <span className="text-yellow-500">REVOLUTION</span>
+            </h2>
+          </div>
           <div className="w-full" style={{ aspectRatio: '16/9' }}>
             <video
               className="w-full h-full object-contain"
@@ -834,7 +904,7 @@ export default function HomePage() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-yellow-500 text-center mb-8">Grants given by</h3>
+            <h3 className="text-2xl font-bold text-yellow-500 text-center mb-8">GRANTS PROVIDED BY</h3>
             <div className="flex flex-col items-center">
               {/* First row - 3 logos */}
               <div className="grid grid-cols-3 w-full">
