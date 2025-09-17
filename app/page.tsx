@@ -290,7 +290,7 @@ export default function HomePage() {
               width:
                 currentView === "mission" && aircraftPosition === 1 ? "50%" : currentView === "vision" ? "0%" : "20%",
               opacity: currentView === "mission" && aircraftPosition === 1 ? 1 : currentView === "vision" ? 0 : 0.6,
-              background: "linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%)",
+              background: "linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.65) 100%)",
               clipPath:
                 currentView === "mission" && aircraftPosition === 1
                   ? "polygon(0 0, 100% 0, 80% 100%, 0 100%)"
@@ -526,21 +526,16 @@ export default function HomePage() {
       </section>
 
       {/* Carbon Savings Calculator Section */}
-      <section id="carbon-calculator" className="py-20 relative bg-slate-800">
+      <section id="carbon-calculator" className="py-12 relative bg-slate-800">
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
-          <div className="text-center mb-16">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center">
-                <Calculator className="w-8 h-8 text-black" />
-              </div>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-black mb-6 font-sans">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 font-sans">
               <span className="text-white">CARBON SAVINGS</span>
               <br />
               <span className="text-yellow-500">CALCULATOR</span>
             </h2>
-            <p className="text-gray-400 text-xl max-w-3xl mx-auto font-sans">
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto font-sans">
               Discover how much carbon footprint you can save by switching to KAT's eVTOL
               <br />
               for cargo and defense operations.
@@ -548,13 +543,13 @@ export default function HomePage() {
           </div>
 
           {/* Calculator Interface */}
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {/* Left Panel - Calculator Form */}
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-600/50">
-              <div className="space-y-6">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/50">
+              <div className="space-y-4">
                 {/* Operation Type Toggle */}
                 <div>
-                  <label className="block text-white text-sm font-medium mb-4">Operation Type</label>
+                  <label className="block text-white text-sm font-medium mb-3">Operation Type</label>
                   <div className="flex bg-slate-600/50 rounded-lg p-1">
                     <button
                       onClick={() => setOperationType("defense")}
@@ -583,13 +578,13 @@ export default function HomePage() {
                   <>
                     {/* Distance Input */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Distance</label>
+                      <label className="block text-white text-sm font-medium mb-3">Distance</label>
                       <div className="relative">
                         <input
                           type="number"
                           value={distance}
                           onChange={(e) => setDistance(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
                           placeholder="0"
                         />
                         <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
@@ -600,13 +595,13 @@ export default function HomePage() {
 
                     {/* Payload Weight Input */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Cargo Weight</label>
+                      <label className="block text-white text-sm font-medium mb-3">Cargo Weight</label>
                       <div className="relative">
                         <input
                           type="number"
                           value={payloadWeight}
                           onChange={(e) => setPayloadWeight(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
                           placeholder="0"
                         />
                         <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
@@ -617,11 +612,11 @@ export default function HomePage() {
 
                     {/* Cargo Type */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Cargo Type</label>
+                      <label className="block text-white text-sm font-medium mb-3">Cargo Type</label>
                       <select
                         value={missionType}
                         onChange={(e) => setMissionType(e.target.value)}
-                        className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 border border-slate-500/50"
+                        className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 border border-slate-500/50"
                       >
                         <option value="General">General Cargo</option>
                         <option value="Medical">Medical Supplies</option>
@@ -634,11 +629,11 @@ export default function HomePage() {
                   <>
                     {/* Mission Type Dropdown */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Mission Type</label>
+                      <label className="block text-white text-sm font-medium mb-3">Mission Type</label>
                       <select
                         value={missionType}
                         onChange={(e) => setMissionType(e.target.value)}
-                        className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 border border-slate-500/50"
+                        className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 border border-slate-500/50"
                       >
                         <option value="ISR/Recon">ISR/Recon</option>
                         <option value="Forward Resupply">Forward Resupply</option>
@@ -650,13 +645,13 @@ export default function HomePage() {
 
                     {/* Operation Duration */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Operation Duration</label>
+                      <label className="block text-white text-sm font-medium mb-3">Operation Duration</label>
                       <div className="relative">
                         <input
                           type="number"
                           value={distance}
                           onChange={(e) => setDistance(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
                           placeholder="0"
                         />
                         <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
@@ -667,13 +662,13 @@ export default function HomePage() {
 
                     {/* Equipment Load */}
                     <div>
-                      <label className="block text-white text-sm font-medium mb-4">Equipment Load</label>
+                      <label className="block text-white text-sm font-medium mb-3">Equipment Load</label>
                       <div className="relative">
                         <input
                           type="number"
                           value={payloadWeight}
                           onChange={(e) => setPayloadWeight(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
                           placeholder="0"
                         />
                         <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
@@ -687,7 +682,7 @@ export default function HomePage() {
                 {/* Calculate Button */}
                 <button
                   onClick={calculateCarbonSavings}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg py-4 px-6 font-bold text-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
+                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg py-3 px-6 font-bold text-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
                 >
                   Calculate Carbon Savings
                 </button>
@@ -695,17 +690,17 @@ export default function HomePage() {
             </div>
 
             {/* Right Panel - Results Display */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Main CO2 Result */}
-              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-600/50">
-                <div className="flex items-center mb-4">
+              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/50">
+                <div className="flex items-center mb-3">
                   <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
                     <span className="text-black text-sm font-bold">🌱</span>
                   </div>
                   <h3 className="text-white text-lg font-semibold">Carbon Savings Results</h3>
                 </div>
                 <div className="text-center">
-                  <div className="text-6xl font-black text-yellow-500 mb-2">{carbonResults.co2Saved} kg</div>
+                  <div className="text-5xl font-black text-yellow-500 mb-2">{carbonResults.co2Saved} kg</div>
                   <div className="text-gray-400 text-sm">CO₂ Saved</div>
                 </div>
               </div>
@@ -713,74 +708,56 @@ export default function HomePage() {
               {/* Secondary Metrics */}
               {operationType === "cargo" ? (
                 // Cargo Operation Metrics
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">⛽</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
                     <div className="text-gray-400 text-xs">Truck Fuel Saved</div>
                   </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">�</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
                     <div className="text-gray-400 text-xs">Truck km Reduced</div>
                   </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">🌳</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.treesPlanted}</div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.treesPlanted}</div>
                     <div className="text-gray-400 text-xs">Trees Equivalent</div>
                   </div>
                 </div>
               ) : (
                 // Defense Operation Metrics
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">🚁</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
                     <div className="text-gray-400 text-xs">Helicopter Fuel Saved</div>
                   </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">🛣️</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
                     <div className="text-gray-400 text-xs">Area Coverage (km)</div>
                   </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-black text-sm font-bold">⚡</span>
-                    </div>
-                    <div className="text-2xl font-bold text-yellow-500 mb-1">{Math.round(carbonResults.katEmission / carbonResults.traditionalEmission * 100)}%</div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
+                    <div className="text-xl font-bold text-yellow-500 mb-1">{Math.round(carbonResults.katEmission / carbonResults.traditionalEmission * 100)}%</div>
                     <div className="text-gray-400 text-xs">Energy Efficiency</div>
                   </div>
                 </div>
               )}
 
               {/* Emission Comparison */}
-              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-600/50">
-                <h4 className="text-white text-lg font-semibold mb-6 text-center">Emission Comparison</h4>
-                <div className="space-y-4">
+              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-5 border border-slate-600/50">
+                <h4 className="text-white text-lg font-semibold mb-3 text-center">Emission Comparison</h4>
+                <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">
+                    <span className="text-gray-300 text-sm">
                       {operationType === "cargo" ? "Traditional Truck:" : "Traditional Helicopter:"}
                     </span>
-                    <span className="text-red-400 font-bold">{carbonResults.traditionalEmission} kg CO₂</span>
+                    <span className="text-red-400 font-bold text-sm">{carbonResults.traditionalEmission} kg CO₂</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">KAT eVTOL:</span>
-                    <span className="text-green-400 font-bold">{carbonResults.katEmission} kg CO₂</span>
+                    <span className="text-gray-300 text-sm">KAT eVTOL:</span>
+                    <span className="text-green-400 font-bold text-sm">{carbonResults.katEmission} kg CO₂</span>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-slate-600/50">
+                  <div className="mt-3 pt-2 border-t border-slate-600/50">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Reduction:</span>
-                      <span className="text-yellow-400 font-bold">
+                      <span className="text-gray-300 text-sm">Reduction:</span>
+                      <span className="text-yellow-400 font-bold text-sm">
                         {Math.round((1 - carbonResults.katEmission / carbonResults.traditionalEmission) * 100)}%
                       </span>
                     </div>
@@ -793,25 +770,27 @@ export default function HomePage() {
       </section>
 
       {/* India's Flight Revolution Section */}
-      <section className="py-20 relative bg-[#121c2b]">
+  <section className="py-20 relative bg-[#121b24]">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 font-sans">
-              <span className="bg-gradient-to-r from-white via-white to-yellow-500 bg-clip-text text-transparent">INDIA'S FLIGHT</span>
-              <br />
+          <div className="text-center mb-10" style={{ marginBottom: '2rem' }}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-sans whitespace-nowrap">
+              <span className="text-white">INDIA'S FLIGHT </span>
               <span className="text-yellow-500">REVOLUTION</span>
             </h2>
           </div>
-          <div className="w-full" style={{ aspectRatio: '16/9' }}>
-            <video
-              className="w-full h-full object-contain"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source src="/Dark theme website video.mp4" type="video/mp4" />
-            </video>
+          <div className="flex justify-center">
+            <div className="w-full" style={{ maxWidth: '1700px' }}>
+              <video
+                className="w-full h-auto object-contain rounded-xl"
+                style={{ maxHeight: '550px' }}
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src="/Dark theme website video.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </section>
@@ -869,10 +848,10 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-4 font-sans">
-              <span className="text-white">SUPPORTED</span>
+              <span className="text-white">SUPPORTED </span>
               <span className="text-yellow-500">BY</span>
             </h2>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 text-lg mt-6">
               Backed by leading institutions, universities, and government initiatives
             </p>
           </div>
