@@ -13,46 +13,43 @@ export default function CareerPage() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
+      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-sm border-b border-gray-800/30">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <video width={80} height={80} autoPlay loop muted playsInline className="object-contain">
-                <source
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KAT%20LOGO%20white-xM2fU9ldjehtteW5SYt4Z23mOYJLUo.mp4"
-                  type="video/mp4"
-                />
-              </video>
+              <img src="/images/kat-logo-white.png" alt="KAT Logo" width={60} height={60} className="object-contain" />
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="hover:text-yellow-400 transition-colors">
+              <a href="/" className="hover:text-yellow-400 transition-all duration-300 font-medium">
                 Home
               </a>
-              <a href="/about" className="hover:text-yellow-400 transition-colors">
+              <a href="/about" className="hover:text-yellow-400 transition-all duration-300 font-medium">
                 About Us
               </a>
-              <a href="/technology" className="hover:text-yellow-400 transition-colors">
+              <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium">
                 Technology
               </a>
-              <a href="/career" className="text-yellow-400">
+              <a href="/career" className="hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5 font-medium">
                 Career
               </a>
-              <button className="hover:text-yellow-400 transition-colors px-3 py-1 rounded-md border border-transparent hover:border-yellow-400/30">
-                Contact
-              </button>
             </div>
-            <div className="flex items-center space-x-3">
-              <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
-              <Phone className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
-              <Mail className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
-              <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
+            <div className="flex items-center space-x-4">
+              <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
+              </a>
+              <a href="mailto:khageshvaramobility@gmail.com">
+                <Mail className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
+              </a>
+              <a href="https://www.linkedin.com/company/khageshvara-aviation-technology-pvt-ltd-k-a-t/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
+              </a>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
           {/* Starfield Effect */}
@@ -242,7 +239,7 @@ export default function CareerPage() {
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-xs">
-              © 2024 Khageshvara Aviation Technology private limited, all rights reserved
+              © 2025 Khageshvara Aviation Technology private limited, all rights reserved
             </p>
           </div>
         </div>

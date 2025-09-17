@@ -53,32 +53,52 @@ export default function HomePage() {
   }
 
   const calculateCarbonSavings = () => {
-    const dist = Number.parseFloat(distance) || 0
-    let calculationBase = 0
+    const value = Number.parseFloat(distance) || 0
+    const weight = Number.parseFloat(payloadWeight) || 0
+    let traditionalEmission = 0
+    let katEmission = 0
+    let fuelSaved = 0
+    let convoyKmAvoided = 0
 
     if (operationType === "cargo") {
-      const weight = Number.parseFloat(payloadWeight) || 0
-      calculationBase = dist * weight
+      // For cargo operations, calculations based on distance and weight
+      const distanceKm = value
+      const cargoWeight = weight
+      
+      // Traditional truck emissions: ~100g CO2 per ton-km
+      traditionalEmission = (distanceKm * cargoWeight / 1000) * 100
+      // KAT eVTOL emissions: ~20g CO2 per ton-km
+      katEmission = (distanceKm * cargoWeight / 1000) * 20
+      
+      // Fuel savings based on average truck consumption of 35L/100km
+      fuelSaved = (distanceKm * 35) / 100
+      convoyKmAvoided = distanceKm
     } else {
-      calculationBase = dist * 10 // Base multiplier for defense operations
+      // For defense operations, calculations based on operation hours and equipment load
+      const operationHours = value
+      const equipmentLoad = weight
+      
+      // Traditional helicopter emissions: ~800kg CO2 per hour
+      traditionalEmission = operationHours * 800
+      // KAT eVTOL emissions: ~160kg CO2 per hour
+      katEmission = operationHours * 160
+      
+      // Fuel savings based on average helicopter consumption of 160L/hour
+      fuelSaved = operationHours * 160
+      // For defense ops, convoy distance avoided is based on operation area coverage
+      convoyKmAvoided = operationHours * 50 // Assuming 50km coverage per hour
     }
 
-    // Simplified calculation for demo purposes
-    const traditionalEmissionFactor = operationType === "cargo" ? 0.5 : 0.6 // kg CO2 per unit
-    const katEmissionFactor = operationType === "cargo" ? 0.1 : 0.12 // kg CO2 per unit
-
-    const traditionalEmission = calculationBase * traditionalEmissionFactor
-    const katEmission = calculationBase * katEmissionFactor
     const co2Saved = traditionalEmission - katEmission
 
     setCarbonResults({
       co2Saved: Math.round(co2Saved),
-      treesPlanted: Math.round(co2Saved / 22), // Assuming 22kg CO2 per tree per year
-      carsOffRoad: Math.round(co2Saved / 4600), // Assuming 4.6 tons CO2 per car per year
+      treesPlanted: Math.round(co2Saved / 22), // Each tree absorbs ~22kg CO2 per year
+      carsOffRoad: Math.round(co2Saved / 4600), // Average car emits 4.6 tons CO2 per year
       traditionalEmission: Math.round(traditionalEmission),
       katEmission: Math.round(katEmission),
-      fuelSaved: Math.round(co2Saved * 0.23), // Approximate fuel saved in liters
-      convoyKmAvoided: Math.round(dist * 0.012), // Convoy kilometers avoided
+      fuelSaved: Math.round(fuelSaved),
+      convoyKmAvoided: Math.round(convoyKmAvoided)
     })
   }
 
@@ -494,54 +514,110 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Mission Type Dropdown */}
-                <div>
-                  <label className="block text-white text-sm font-medium mb-4">Mission Type</label>
-                  <select
-                    value={missionType}
-                    onChange={(e) => setMissionType(e.target.value)}
-                    className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 border border-slate-500/50"
-                  >
-                    <option value="ISR/Recon">ISR/Recon</option>
-                    <option value="Transport">Transport</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Search & Rescue">Search & Rescue</option>
-                  </select>
-                </div>
+                {operationType === "cargo" ? (
+                  <>
+                    {/* Distance Input */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Distance</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={distance}
+                          onChange={(e) => setDistance(e.target.value)}
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          placeholder="0"
+                        />
+                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                          km
+                        </span>
+                      </div>
+                    </div>
 
-                {/* Distance Input */}
-                <div>
-                  <label className="block text-white text-sm font-medium mb-4">Distance</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={distance}
-                      onChange={(e) => setDistance(e.target.value)}
-                      className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
-                      placeholder="0"
-                    />
-                    <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                      km
-                    </span>
-                  </div>
-                </div>
+                    {/* Payload Weight Input */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Cargo Weight</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={payloadWeight}
+                          onChange={(e) => setPayloadWeight(e.target.value)}
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          placeholder="0"
+                        />
+                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                          kg
+                        </span>
+                      </div>
+                    </div>
 
-                {/* Payload Input */}
-                <div>
-                  <label className="block text-white text-sm font-medium mb-4">Payload</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={payloadWeight}
-                      onChange={(e) => setPayloadWeight(e.target.value)}
-                      className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
-                      placeholder="0"
-                    />
-                    <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                      kg
-                    </span>
-                  </div>
-                </div>
+                    {/* Cargo Type */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Cargo Type</label>
+                      <select
+                        value={missionType}
+                        onChange={(e) => setMissionType(e.target.value)}
+                        className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 border border-slate-500/50"
+                      >
+                        <option value="General">General Cargo</option>
+                        <option value="Medical">Medical Supplies</option>
+                        <option value="Perishable">Perishable Goods</option>
+                        <option value="Emergency">Emergency Supplies</option>
+                      </select>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Mission Type Dropdown */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Mission Type</label>
+                      <select
+                        value={missionType}
+                        onChange={(e) => setMissionType(e.target.value)}
+                        className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 border border-slate-500/50"
+                      >
+                        <option value="ISR/Recon">ISR/Recon</option>
+                        <option value="Forward Resupply">Forward Resupply</option>
+                        <option value="CASEVAC/MEDEVAC">CASEVAC/MEDEVAC</option>
+                        <option value="SAR">Search & Rescue</option>
+                        <option value="Border Patrol">Border Patrol</option>
+                      </select>
+                    </div>
+
+                    {/* Operation Duration */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Operation Duration</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={distance}
+                          onChange={(e) => setDistance(e.target.value)}
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          placeholder="0"
+                        />
+                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                          hours
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Equipment Load */}
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-4">Equipment Load</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={payloadWeight}
+                          onChange={(e) => setPayloadWeight(e.target.value)}
+                          className="w-full bg-slate-600/50 text-white rounded-lg py-3 px-4 pr-12 border border-slate-500/50"
+                          placeholder="0"
+                        />
+                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                          kg
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 {/* Calculate Button */}
                 <button
@@ -570,38 +646,79 @@ export default function HomePage() {
               </div>
 
               {/* Secondary Metrics */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                  <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
-                  <div className="text-gray-400 text-xs">Fuel saved</div>
-                </div>
-                <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                  <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <span className="text-black text-sm font-bold">🚗</span>
+              {operationType === "cargo" ? (
+                // Cargo Operation Metrics
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">⛽</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
+                    <div className="text-gray-400 text-xs">Truck Fuel Saved</div>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.carsOffRoad}</div>
-                  <div className="text-gray-400 text-xs">Convoy km avoided</div>
-                </div>
-                <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
-                  <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <span className="text-black text-sm font-bold">🌳</span>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">�</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
+                    <div className="text-gray-400 text-xs">Truck km Reduced</div>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.treesPlanted}</div>
-                  <div className="text-gray-400 text-xs">Trees planted per year</div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">🌳</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.treesPlanted}</div>
+                    <div className="text-gray-400 text-xs">Trees Equivalent</div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                // Defense Operation Metrics
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">🚁</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
+                    <div className="text-gray-400 text-xs">Helicopter Fuel Saved</div>
+                  </div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">🛣️</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
+                    <div className="text-gray-400 text-xs">Area Coverage (km)</div>
+                  </div>
+                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600/50 text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <span className="text-black text-sm font-bold">⚡</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-500 mb-1">{Math.round(carbonResults.katEmission / carbonResults.traditionalEmission * 100)}%</div>
+                    <div className="text-gray-400 text-xs">Energy Efficiency</div>
+                  </div>
+                </div>
+              )}
 
               {/* Emission Comparison */}
               <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-600/50">
                 <h4 className="text-white text-lg font-semibold mb-6 text-center">Emission Comparison</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Traditional:</span>
-                    <span className="text-red-400 font-bold">{carbonResults.traditionalEmission} kg</span>
+                    <span className="text-gray-300">
+                      {operationType === "cargo" ? "Traditional Truck:" : "Traditional Helicopter:"}
+                    </span>
+                    <span className="text-red-400 font-bold">{carbonResults.traditionalEmission} kg CO₂</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">KAT eVTOL:</span>
-                    <span className="text-green-400 font-bold">{carbonResults.katEmission} kg</span>
+                    <span className="text-green-400 font-bold">{carbonResults.katEmission} kg CO₂</span>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-600/50">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Reduction:</span>
+                      <span className="text-yellow-400 font-bold">
+                        {Math.round((1 - carbonResults.katEmission / carbonResults.traditionalEmission) * 100)}%
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -632,8 +749,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-6 font-sans">
-              <span className="text-white">USE</span>
-              <br />
+              <span className="text-white">USE </span>
               <span className="text-yellow-500">CASES</span>
             </h2>
             <p className="text-gray-400 text-xl max-w-3xl mx-auto font-sans">
@@ -844,7 +960,7 @@ export default function HomePage() {
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-xs">
-              © 2024 Khageshvara Aviation Technology private limited, all rights reserved
+              © 2025 Khageshvara Aviation Technology private limited, all rights reserved
             </p>
           </div>
         </div>

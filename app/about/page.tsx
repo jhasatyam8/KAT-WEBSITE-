@@ -441,7 +441,7 @@ export default function AboutPage() {
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-xs">
-              © 2024 Khageshvara Aviation Technology private limited, all rights reserved
+              © 2025 Khageshvara Aviation Technology private limited, all rights reserved
             </p>
           </div>
         </div>
