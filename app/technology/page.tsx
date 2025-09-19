@@ -136,6 +136,7 @@ export default function TechnologyPage() {
   const [selectedAircraft, setSelectedAircraft] = useState("K-VAAYU")
   const [isVisible, setIsVisible] = useState({})
   const [expandedTech, setExpandedTech] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -191,6 +192,27 @@ export default function TechnologyPage() {
               </a>
             </div>
             <div className="flex items-center space-x-4">
+              {/* Mobile Menu Button */}
+              <button 
+                className="md:hidden p-2 text-yellow-400 hover:text-yellow-300 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMobileMenuOpen ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
               <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
                 <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
               </a>
@@ -203,6 +225,42 @@ export default function TechnologyPage() {
                 rel="noopener noreferrer"
               >
                 <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-all duration-300 hover:scale-110" />
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          <div
+            className={`md:hidden transition-all duration-300 ease-in-out ${
+              isMobileMenuOpen
+                ? "max-h-64 opacity-100 mt-4"
+                : "max-h-0 opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="flex flex-col space-y-4 py-4">
+              <a
+                href="/"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Home
+              </a>
+              <a
+                href="/about"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                About Us
+              </a>
+              <a
+                href="/technology"
+                className="text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Technology
+              </a>
+              <a
+                href="/career"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Career
               </a>
             </div>
           </div>

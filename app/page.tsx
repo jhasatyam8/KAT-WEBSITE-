@@ -246,7 +246,7 @@ export default function HomePage() {
       <section
         ref={missionVisionRef}
         id="mission-vision"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black cursor-pointer"
+        className="relative min-h-screen items-center justify-center overflow-hidden bg-black cursor-pointer hidden lg:flex"
         onClick={() => {
           if (!isTransitioning) {
             if (currentView === "mission") {
@@ -525,6 +525,26 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
       </section>
 
+      {/* Mission & Vision Section - Mobile Layout */}
+      <section className="lg:hidden bg-black text-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold text-yellow-400 text-center mb-4">OUR MISSION</h2>
+            <p className="text-gray-300 text-center leading-relaxed">
+              Our mission to redefine the future of transportation with next-gen, safe, fast, and sustainable mobility
+              solutions. Our commitment is encapsulated in our ethos: <span className="text-yellow-300 font-semibold">'Reaching the Unreachable'</span>, as we strive to access remote areas and serve underserved communities.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-4xl font-bold text-blue-400 text-center mb-4">OUR VISION</h2>
+            <p className="text-gray-300 text-center leading-relaxed">
+              Our vision is to lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways, cutting
+              aviation carbon emissions, and fostering sustainable growth: <span className="text-blue-300 font-semibold">'the forefront of next-gen mobility'</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Carbon Savings Calculator Section */}
       <section id="carbon-calculator" className="py-12 relative bg-slate-800">
         <div className="container mx-auto px-6 relative z-10">
@@ -773,9 +793,9 @@ export default function HomePage() {
   <section className="py-20 relative bg-[#121b24]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-10" style={{ marginBottom: '2rem' }}>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-sans whitespace-nowrap">
-              <span className="text-white">INDIA'S FLIGHT </span>
-              <span className="text-yellow-500">REVOLUTION</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-sans leading-tight md:leading-none">
+              <span className="text-white block md:inline">INDIA'S FLIGHT</span>
+              <span className="text-yellow-500 block md:inline"> REVOLUTION</span>
             </h2>
           </div>
           <div className="flex justify-center">
@@ -835,7 +855,7 @@ export default function HomePage() {
                 <img
                   src={`/images/use-cases/${activeUseCase}.png`}
                   alt={`${activeUseCase} use case`}
-                  className="w-full h-96 object-cover rounded-lg mb-6"
+                  className="w-full h-auto max-h-96 md:max-h-[500px] object-cover rounded-lg mb-6"
                 />
               </div>
             )}
