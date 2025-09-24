@@ -90,45 +90,13 @@ interface TeamCardProps {
 
 function TeamCard({ member, index }: TeamCardProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Add delay based on index for staggered animation
-            setTimeout(() => {
-              setIsVisible(true)
-            }, index * 150)
-          }
-        })
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "-100px 0px -50px 0px", // Only trigger when well into view
-      },
-    )
-
-    const cardElement = document.getElementById(`team-card-${index}`)
-    if (cardElement) {
-      observer.observe(cardElement)
-    }
-
-    return () => observer.disconnect()
-  }, [index])
 
   return (
     <div
       id={`team-card-${index}`}
-      className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 shadow-2xl transition-all duration-700 hover:scale-105 hover:shadow-yellow-400/20 hover:border-yellow-400/30 cursor-pointer mb-8 transform ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
-      }`}
+      className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 shadow-2xl transition-all duration-700 hover:scale-105 hover:shadow-yellow-400/20 hover:border-yellow-400/30 cursor-pointer mb-8 transform translate-y-0 opacity-100`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        transitionDelay: isVisible ? "0ms" : `${index * 100}ms`,
-      }}
     >
       {/* Profile Image */}
       <div className="relative w-full aspect-square overflow-hidden">

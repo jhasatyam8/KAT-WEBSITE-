@@ -223,11 +223,12 @@ export default function HomePage() {
         {/* Video Background */}
         <div className="absolute inset-0 z-10">
           <video
-            className="w-full h-[300px] md:h-[500px] lg:h-full object-cover"
+            className="w-full h-[300px] md:h-[500px] lg:h-full object-contain md:object-cover"
             autoPlay
             loop
             muted
             playsInline
+            preload="metadata"
           >
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
           </video>
@@ -802,11 +803,12 @@ export default function HomePage() {
             <div className="w-full" style={{ maxWidth: '1700px' }}>
               <video
                 className="w-full h-auto object-contain rounded-xl"
-                style={{ maxHeight: '550px' }}
+                style={{ maxHeight: 'calc(100vh - 200px)' }}
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="metadata"
               >
                 <source src="/Dark theme website video.mp4" type="video/mp4" />
               </video>

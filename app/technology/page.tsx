@@ -342,26 +342,42 @@ export default function TechnologyPage() {
                   </h3>
 
                   {selectedAircraft === aircraft && (
-                    <div className="grid grid-cols-2 gap-4 animate-fade-in">
-                      <div>
-                        <p className="text-gray-400 text-sm">Payload Capacity:</p>
-                        <p className="text-white font-semibold">{aircraftData[aircraft].payload}</p>
+                    <div className="animate-fade-in">
+                      {/* Mobile: Show image below specs */}
+                      <div className="lg:hidden mb-6">
+                        <div className="relative h-[300px] flex items-center justify-center">
+                          <Image
+                            src={aircraftData[aircraft as keyof typeof aircraftData].image || "/placeholder.svg"}
+                            alt={`${aircraft} Aircraft`}
+                            width={selectedAircraft === "K-OSPERA" ? 400 : selectedAircraft === "K-RUDRA" ? 350 : 300}
+                            height={selectedAircraft === "K-OSPERA" ? 400 : selectedAircraft === "K-RUDRA" ? 350 : 300}
+                            className="object-contain transition-all duration-500 filter brightness-110"
+                          />
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">Range:</p>
-                        <p className="text-white font-semibold">{aircraftData[aircraft].range}</p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">Endurance:</p>
-                        <p className="text-white font-semibold">{aircraftData[aircraft].endurance}</p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">Speed:</p>
-                        <p className="text-white font-semibold">{aircraftData[aircraft].speed}</p>
-                      </div>
-                      <div className="col-span-2">
-                        <p className="text-gray-400 text-sm">Altitude:</p>
-                        <p className="text-white font-semibold">{aircraftData[aircraft].altitude}</p>
+
+                      {/* Aircraft specs */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-gray-400 text-sm">Payload Capacity:</p>
+                          <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].payload}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">Range:</p>
+                          <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].range}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">Endurance:</p>
+                          <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].endurance}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">Speed:</p>
+                          <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].speed}</p>
+                        </div>
+                        <div className="col-span-2">
+                          <p className="text-gray-400 text-sm">Altitude:</p>
+                          <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].altitude}</p>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -369,12 +385,12 @@ export default function TechnologyPage() {
               ))}
             </div>
 
-            {/* Aircraft 3D Model */}
-            <div className="relative h-[500px] flex items-center justify-center">
+            {/* Aircraft 3D Model - Hidden on mobile when aircraft is selected */}
+            <div className={`relative h-[500px] flex items-center justify-center ${selectedAircraft ? 'hidden lg:flex' : 'flex'}`}>
               <div className="relative w-full h-full">
                 <div className="w-full h-full flex items-center justify-center">
                   <Image
-                    src={aircraftData[selectedAircraft].image || "/placeholder.svg"}
+                    src={aircraftData[selectedAircraft as keyof typeof aircraftData].image || "/placeholder.svg"}
                     alt={`${selectedAircraft} Aircraft`}
                     width={selectedAircraft === "K-OSPERA" ? 600 : selectedAircraft === "K-RUDRA" ? 500 : 420}
                     height={selectedAircraft === "K-OSPERA" ? 600 : selectedAircraft === "K-RUDRA" ? 500 : 420}
@@ -390,10 +406,10 @@ export default function TechnologyPage() {
 
       {/* Technology Section */}
       <section id="technology" className="py-20" data-animate>
-        <div className="container mx-auto px-32">
+        <div className="container mx-auto px-6 lg:px-32">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">OUR TECHNOLOGY</h2>
-            <p className="text-gray-400 text-xl max-w-3xl mx-auto">
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto">
               A next-gen modular tech suite for autonomous deployment, efficiency, and endurance
             </p>
           </div>
@@ -402,25 +418,25 @@ export default function TechnologyPage() {
             {technologies.map((tech, index) => (
               <div
                 key={tech.number}
-                className={`grid lg:grid-cols-2 gap-0 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}
+                className={`grid lg:grid-cols-2 gap-8 lg:gap-0 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}
                 data-animate
               >
                 {/* Content */}
                 <div className={`relative ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                  <div className="absolute -top-8 -left-8 text-9xl font-bold text-yellow-400/10 select-none">
+                  <div className="absolute -top-8 -left-8 text-7xl md:text-9xl font-bold text-yellow-400/10 select-none">
                     {tech.number}
                   </div>
                   <div className="relative z-10">
-                    <p className="text-yellow-400 text-sm font-semibold mb-2 tracking-wider uppercase">
+                    <p className="text-yellow-400 text-sm md:text-base font-semibold mb-2 tracking-wider uppercase">
                       {tech.subtitle}
                     </p>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-4 relative">{tech.title}</h3>
-                    <p className="text-gray-300 text-lg mb-6">{tech.description}</p>
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 relative">{tech.title}</h3>
+                    <p className="text-gray-300 text-base md:text-lg mb-6">{tech.description}</p>
                     <ul className="space-y-2 mb-6">
                       {tech.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-300">{feature}</span>
+                          <span className="text-gray-300 text-sm md:text-base">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -454,7 +470,7 @@ export default function TechnologyPage() {
                 </div>
 
                 {/* Tech Illustration */}
-                <div className={`relative h-[400px] ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
+                <div className={`relative h-[300px] md:h-[400px] lg:h-[500px] ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
                   <div className="relative w-full h-full flex items-center justify-center">
                     {/* Real Tech Image */}
                     <div className="relative w-full h-full flex items-center justify-center">
