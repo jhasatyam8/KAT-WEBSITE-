@@ -187,6 +187,9 @@ export default function TechnologyPage() {
               <a href="/technology" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 Technology
               </a>
+              <a href="/impact" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
+                Impact
+              </a>
               <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
               </a>
@@ -503,6 +506,9 @@ export default function TechnologyPage() {
                 <a href="/technology" className="text-gray-400 hover:text-yellow-400 transition-colors block">
                   Technology
                 </a>
+                <a href="/impact" className="text-gray-400 hover:text-yellow-400 transition-colors block">
+                  Impact
+                </a>
                 <a href="/career" className="text-gray-400 hover:text-yellow-400 transition-colors block">
                   Career
                 </a>
@@ -529,7 +535,7 @@ export default function TechnologyPage() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400">
-              © 2024 Khageshvara Aviation Technology. All rights reserved.
+              © 2025 Khageshvara Aviation Technology. All rights reserved.
             </p>
           </div>
         </div>
