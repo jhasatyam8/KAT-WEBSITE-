@@ -30,6 +30,9 @@ export default function CareerPage() {
               <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
               </a>
+              <a href="/impact" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
+                Impact
+              </a>
               <a href="/career" className="text-yellow-400 font-medium px-4 py-2 rounded-lg border border-yellow-400/30 bg-yellow-400/5">
                 Career
               </a>
@@ -94,6 +97,12 @@ export default function CareerPage() {
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
               >
                 Technology
+              </a>
+              <a
+                href="/impact"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Impact
               </a>
               <a
                 href="/career"
@@ -281,6 +290,9 @@ export default function CareerPage() {
               </a>
               <a href="/technology" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Technology
+              </a>
+              <a href="/impact" className="text-white hover:text-yellow-400 transition-colors text-sm">
+                Impact
               </a>
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers

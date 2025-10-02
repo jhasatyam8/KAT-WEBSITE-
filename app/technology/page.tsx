@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -6,13 +6,13 @@ import { ChevronDown, Instagram, Mail, Linkedin, X } from "lucide-react"
 import Image from "next/image"
 
 const aircraftData = {
-  "K-VAAYU": {
-    payload: "Up to 10kg",
-    range: "20+ Km",
-    endurance: "45+ Min",
-    speed: "70 Kmph",
-    altitude: "0-2,500 m AMSL",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/k-5-FeueTyzB4Jamo0YPg9qSpzmyf9xcoH.png",
+  "K-OSPERA": {
+    payload: "Up to 400kg",
+    range: "200+ Km",
+    endurance: "180+ Min",
+    speed: "250 Kmph",
+    altitude: "0-10,000 m AMSL",
+    image: "/k-200.png",
   },
   "K-RUDRA": {
     payload: "Up to 100kg",
@@ -22,13 +22,13 @@ const aircraftData = {
     altitude: "0-5,000 m AMSL",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/k-50-0Mr3Mwrj8qen60wDQ7QpZeB3yePp6t.png",
   },
-  "K-OSPERA": {
-    payload: "Up to 400kg",
-    range: "200+ Km",
-    endurance: "180+ Min",
-    speed: "250 Kmph",
-    altitude: "0-10,000 m AMSL",
-    image: "/k-200.png",
+  "K-VAAYU": {
+    payload: "Up to 10kg",
+    range: "20+ Km",
+    endurance: "45+ Min",
+    speed: "70 Kmph",
+    altitude: "0-2,500 m AMSL",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/k-5-FeueTyzB4Jamo0YPg9qSpzmyf9xcoH.png",
   },
 }
 
@@ -133,7 +133,7 @@ const technologies = [
 ]
 
 export default function TechnologyPage() {
-  const [selectedAircraft, setSelectedAircraft] = useState("K-VAAYU")
+  const [selectedAircraft, setSelectedAircraft] = useState("K-OSPERA")
   const [isVisible, setIsVisible] = useState({})
   const [expandedTech, setExpandedTech] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -405,86 +405,71 @@ export default function TechnologyPage() {
       </section>
 
       {/* Technology Section */}
-      <section id="technology" className="py-20" data-animate>
-        <div className="container mx-auto px-6 lg:px-32">
+      <section id="technology" className="py-20 bg-gray-900/30" data-animate>
+        <div className="container mx-auto px-6 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">OUR TECHNOLOGY</h2>
-            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto">
-              A next-gen modular tech suite for autonomous deployment, efficiency, and endurance
+            <p className="text-gray-400 text-xl max-w-3xl mx-auto">
+              Six core technologies powering the next generation of aerial mobility solutions
             </p>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-20 max-w-7xl mx-auto">
             {technologies.map((tech, index) => (
               <div
                 key={tech.number}
-                className={`grid lg:grid-cols-2 gap-8 lg:gap-0 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}
-                data-animate
+                className={`grid lg:grid-cols-2 gap-12 items-center ${
+                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
+                }`}
               >
                 {/* Content */}
-                <div className={`relative ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                  <div className="absolute -top-8 -left-8 text-7xl md:text-9xl font-bold text-yellow-400/10 select-none">
-                    {tech.number}
+                <div className={`space-y-6 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-6xl font-bold text-yellow-400/20">{tech.number}</span>
+                    <div>
+                      <h3 className="text-3xl font-bold text-yellow-400">{tech.title}</h3>
+                      <p className="text-gray-400 font-medium">{tech.subtitle}</p>
+                    </div>
                   </div>
-                  <div className="relative z-10">
-                    <p className="text-yellow-400 text-sm md:text-base font-semibold mb-2 tracking-wider uppercase">
-                      {tech.subtitle}
-                    </p>
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 relative">{tech.title}</h3>
-                    <p className="text-gray-300 text-base md:text-lg mb-6">{tech.description}</p>
-                    <ul className="space-y-2 mb-6">
-                      {tech.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-300 text-sm md:text-base">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
 
-                    {/* Read More Section */}
-                    {expandedTech === tech.number && (
-                      <div className="mb-6 p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 animate-fade-in">
-                        <div className="flex justify-between items-start mb-3">
-                          <h4 className="text-yellow-400 font-semibold">Read More:</h4>
-                          <button
-                            onClick={() => toggleReadMore(tech.number)}
-                            className="text-gray-400 hover:text-white transition-colors"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                        <p className="text-gray-300 text-sm leading-relaxed">{tech.readMore}</p>
+                  <p className="text-gray-300 text-lg leading-relaxed">{tech.description}</p>
+
+                  <div className="space-y-3">
+                    {tech.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <p className="text-gray-300">{feature}</p>
                       </div>
-                    )}
-
-                    <button
-                      onClick={() => toggleReadMore(tech.number)}
-                      className="text-yellow-400 hover:text-yellow-300 font-semibold flex items-center space-x-2 transition-colors"
-                    >
-                      <span>{expandedTech === tech.number ? "read less" : "read more"}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-300 ${expandedTech === tech.number ? "rotate-180" : "rotate-[-90deg]"}`}
-                      />
-                    </button>
+                    ))}
                   </div>
+
+                  <div className="pt-4">
+                    <Button
+                      onClick={() => toggleReadMore(tech.number)}
+                      className="bg-yellow-400 text-black hover:bg-yellow-300 px-6 py-2 rounded-lg font-semibold transition-all duration-300"
+                    >
+                      {expandedTech === tech.number ? "Read Less" : "Read More"}
+                    </Button>
+                  </div>
+
+                  {expandedTech === tech.number && (
+                    <div className="mt-6 p-6 bg-gray-800/50 rounded-lg border border-gray-700 animate-fade-in">
+                      <p className="text-gray-300 leading-relaxed">{tech.readMore}</p>
+                    </div>
+                  )}
                 </div>
 
-                {/* Tech Illustration */}
-                <div className={`relative h-[300px] md:h-[400px] lg:h-[500px] ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    {/* Real Tech Image */}
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      <Image
-                        src={tech.image || "/placeholder.svg"}
-                        alt={tech.title}
-                        width={tech.imageSize}
-                        height={tech.imageSize}
-                        className={`object-contain transition-all duration-500 filter brightness-110 hover:scale-105`}
-                        style={{
-                          transform: tech.transform || "none",
-                        }}
-                      />
-                    </div>
+                {/* Image */}
+                <div className={`relative h-[400px] flex items-center justify-center ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
+                  <div className="relative">
+                    <Image
+                      src={tech.image}
+                      alt={tech.title}
+                      width={tech.imageSize}
+                      height={tech.imageSize}
+                      className={`object-contain transition-all duration-500 filter brightness-110 hover:scale-105 ${tech.transform || ""}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
                   </div>
                 </div>
               </div>
@@ -494,89 +479,57 @@ export default function TechnologyPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-800 bg-black">
+      <footer className="bg-black border-t border-gray-800 py-12">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-            {/* Logo Section */}
-            <div className="flex flex-col items-center lg:items-start">
-              <div className="flex flex-col items-center mb-4">
-                <img
-                  src="/images/kat-logo-white.png"
-                  alt="KAT Logo"
-                  width={96}
-                  height={96}
-                  className="object-contain mb-2"
-                />
-                <span className="text-yellow-400 text-lg font-bold">K.A.T</span>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <img src="/images/kat-logo-white.png" alt="KAT Logo" width={40} height={40} />
+                <span className="text-xl font-bold">KAT</span>
               </div>
+              <p className="text-gray-400">
+                Pioneering the future of aerial mobility with cutting-edge technology and innovative solutions.
+              </p>
             </div>
-
-            {/* Contact Information */}
-            <div className="lg:col-span-2 space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-white text-sm">30, Green Avenue, Khatipura Road, Jharkhand</p>
-                  <p className="text-white text-sm">Mod, Jaipur, 302012, Rajasthan.</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <div className="w-5 h-5 text-yellow-400 flex-shrink-0">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                  </svg>
-                </div>
-                <p className="text-white text-sm">+91 89529 43460</p>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                <a
-                  href="mailto:khageshvaramobility@gmail.com"
-                  className="text-white text-sm hover:text-yellow-400 transition-colors"
-                >
-                  khageshvaramobility@gmail.com
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <div className="space-y-2">
+                <a href="/" className="text-gray-400 hover:text-yellow-400 transition-colors block">
+                  Home
+                </a>
+                <a href="/about" className="text-gray-400 hover:text-yellow-400 transition-colors block">
+                  About Us
+                </a>
+                <a href="/technology" className="text-gray-400 hover:text-yellow-400 transition-colors block">
+                  Technology
+                </a>
+                <a href="/career" className="text-gray-400 hover:text-yellow-400 transition-colors block">
+                  Career
                 </a>
               </div>
             </div>
-
-            {/* Navigation Links */}
-            <div className="flex flex-col space-y-3">
-              <a href="/about" className="text-white hover:text-yellow-400 transition-colors text-sm">
-                About Us
-              </a>
-              <a href="/technology" className="text-white hover:text-yellow-400 transition-colors text-sm">
-                Technology
-              </a>
-              <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
-                Careers
-              </a>
-
-              {/* Social Media Icons */}
-              <div className="flex items-center space-x-4 pt-4">
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
+              <div className="flex space-x-4">
+                <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
+                  <Instagram className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
+                </a>
+                <a href="mailto:khageshvaramobility@gmail.com">
+                  <Mail className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
+                </a>
                 <a
                   href="https://www.linkedin.com/company/khageshvara-aviation-technology-pvt-ltd-k-a-t/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
-                </a>
-                <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
-                  <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
+                  <Linkedin className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
                 </a>
               </div>
             </div>
           </div>
-
-          {/* Copyright */}
-          <div className="border-t border-gray-800 mt-8 pt-6 text-center">
-            <p className="text-gray-400 text-xs">
-              © 2025 Khageshvara Aviation Technology private limited, all rights reserved
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400">
+              © 2024 Khageshvara Aviation Technology. All rights reserved.
             </p>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Instagram, Mail, Linkedin } from "lucide-react"
+import { Instagram, Mail, Linkedin, X } from "lucide-react"
 
 const teamMembers = {
   column1: [
@@ -11,12 +11,14 @@ const teamMembers = {
       title: "Business Development Lead",
       tagline: "Scaling new heights",
       image: "/vedansh-aggrawal.png",
+      description: "A diligent third-year Bachelor's student at BITS Pilani, serving as the Business Development Lead at Khageshvara Aviation Technology Private Limited. With a strategic mindset, he plays a crucial role in propelling company growth and cultivating essential partnerships, showcasing exemplary leadership and business acumen. His responsibilities include securing startup funding, ensuring the tech team has the right equipment, and developing the business and financial plan of the company.",
     },
     {
       name: "Satyam Jha",
       title: "Creative Content Associate",
       tagline: "Crafting visual stories",
       image: "/satyam-jha.png",
+      description: "I'm currently a student at BITS Pilani, and I also wear the hat of Creative Content Associate for the team. My role is to give our pioneering work its voice, shaping how we tell our story through words and visuals. I conceptualize, design, and develop all our creative and digital assets, from LinkedIn and Instagram posts to this website. I handle both the creative direction and technical execution of our digital presence, ensuring it's as engaging and innovative as our technology.",
     },
   ],
   column2: [
@@ -25,53 +27,60 @@ const teamMembers = {
       title: "Co-Founder",
       tagline: "Visionary behind the revolution",
       image: "/ritvik-yadav.png",
+      description: "In the tapestry of my life, aerospace has been a continuous thread, woven since childhood. Drones and UAVs were my youthful muses. Amid the intricate fabric of my engineering life, destiny led me to contribute to Uber Elevate's Air Taxi concept—a juncture that propelled me into a love affair with the skies, echoing the mythical journey of Khageshvara. My key roles are majorly designing and analyzing components of our EVTOL, along with parts procurement for the same.",
     },
     {
       name: "Ujjwal Kumar",
       title: "Design Lead",
       tagline: "Form meets function",
       image: "/ujjwal-kumar.jpeg",
+      description: "As Design Lead, I focus on creating innovative and functional designs that push the boundaries of what's possible in aerial mobility. My work encompasses both aesthetic and engineering considerations, ensuring our products are not only cutting-edge but also user-friendly and efficient.",
     },
     {
       name: "Gaurav Sharma",
-      title: "Machine Learning and SLAM Lead",
+      title: "Machine Learning & SLAM Lead",
       tagline: "Teaching machines to see",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gaurav-sharma-PhQPLK2oH6daLTW0AL5MjnaJENcnkc.jpeg",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gaurav-sharma-PhQPLK2oH6daLTW0AL5MjnaJENcnkc.jpeg",
+      description: "I am the Machine Learning and SLAM Lead, pioneering the technology that allows our systems to understand the environment. I develop the algorithms that enable our vehicles to perceive, map, and navigate autonomously with high precision.",
     },
   ],
   column3: [
     {
-      name: "Swasti Dubey",
-      title: "Marketing Content Lead",
+      name: "Swasti",
+      title: "Marketing & Content Lead",
       tagline: "Storytelling the future",
       image: "/swasti-dubey.jpeg",
+      description: "As a Marketing and Content Lead, I assist in strategic decision-making and optimize operational processes. I analyze data to provide insights and handle multiple responsibilities with adaptability. I embody and promote the brand's values and possess in-depth product knowledge. I engage in public relations, actively promote the brand on social media, and represent the brand at events. I interact with customers, gather feedback, and generate leads, ensuring effective brand presence and loyalty.",
     },
     {
-      name: "Tashif Syed",
-      title: "Aero Propulsion Lead",
+      name: "Tashif",
+      title: "Strategic Aeropropulsion Lead",
       tagline: "Defying gravity daily",
       image: "/tashif-ali-final.jpeg",
+      description: "As the Strategic Aeropropulsion Lead, I oversee the propulsion system design, ensuring both efficiency and regulatory compliance, while focusing on aeroacoustic modeling for noise reduction. I manage system integration, conduct performance testing, and continually optimize propulsion efficiency. Collaborating with engineering teams, I ensure seamless integration of propulsion and noise control systems. Additionally, I prepare detailed technical drawings, propulsion system specifications, and topographical maps to align with industry standards and customer requirements. I document noise reduction processes and testing outcomes comprehensively, providing critical insights to support ongoing and future projects.",
     },
   ],
   column4: [
     {
-      name: "Shyaandeep Das",
+      name: "Shyandeep Das",
       title: "Co-Founder",
       tagline: "Leading strategic vision",
       image: "/shayandeep-das.png",
+      description: "Shayandeep Das is one of K.A.T's co-founders. He is currently pursuing a Master's in Health Economics and Statistics at Oxford University and works as a Data Analyst. He was formerly a Board Member of a nonprofit. Passionate about machine learning and the electrification of drones, he now leads the business development and strategy of K.A.T. Let's together Reach the Unreachable.",
     },
     {
       name: "Madhav Menon",
-      title: "Propulsion System Lead",
+      title: "Propulsion Team Lead",
       tagline: "Engineering propulsion excellence",
       image: "/madhav-menon.jpeg",
+      description: "As the Propulsion Team Lead, I am responsible for providing the necessary thrust and control for the EVTOL across all mission phases. I lead the design, development, and testing of various electro-mechanical systems essential to the propulsion system, ensuring reliable performance and mission success. This involves overseeing the creation and integration of advanced propulsion technologies to achieve precise control and efficiency throughout each stage of flight.",
     },
     {
       name: "Mathew George",
       title: "Wing and Tail Design Lead",
       tagline: "Perfecting aerodynamic excellence",
       image: "/mathew-george.jpeg",
+      description: "Mathew is a student at BITS Pilani and leads the design of our eVTOL's wing and tail systems. His work focuses on creating efficient, reliable, and aerodynamically sound designs that form the backbone of our aircraft's performance. By blending technical expertise with a sharp eye for detail, he ensures that every element of the wing and tail contributes to both stability and innovation in our aerial mobility solutions.",
     },
   ],
 }
@@ -81,14 +90,16 @@ interface TeamMember {
   title: string
   tagline: string
   image: string
+  description: string
 }
 
 interface TeamCardProps {
   member: TeamMember
   index: number
+  onMemberClick: (member: TeamMember) => void
 }
 
-function TeamCard({ member, index }: TeamCardProps) {
+function TeamCard({ member, index, onMemberClick }: TeamCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -97,6 +108,7 @@ function TeamCard({ member, index }: TeamCardProps) {
       className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 shadow-2xl transition-all duration-700 hover:scale-105 hover:shadow-yellow-400/20 hover:border-yellow-400/30 cursor-pointer mb-8 transform translate-y-0 opacity-100`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onMemberClick(member)}
     >
       {/* Profile Image */}
       <div className="relative w-full aspect-square overflow-hidden">
@@ -154,10 +166,12 @@ function ParallaxColumn({
   members,
   speed,
   columnIndex,
+  onMemberClick,
 }: {
   members: TeamMember[]
   speed: number
   columnIndex: number
+  onMemberClick: (member: TeamMember) => void
 }) {
   const [scrollY, setScrollY] = useState(0)
 
@@ -178,7 +192,12 @@ function ParallaxColumn({
         }}
       >
         {members.map((member, index) => (
-          <TeamCard key={`${columnIndex}-${index}`} member={member} index={columnIndex * 3 + index} />
+          <TeamCard 
+            key={`${columnIndex}-${index}`} 
+            member={member} 
+            index={columnIndex * 3 + index} 
+            onMemberClick={onMemberClick}
+          />
         ))}
       </div>
     </div>
@@ -188,10 +207,46 @@ function ParallaxColumn({
 export default function AboutPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
   }, [])
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        closeModal()
+      }
+    }
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleEscapeKey)
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey)
+      }
+    }
+  }, [isModalOpen])
+
+  const handleMemberClick = (member: TeamMember) => {
+    setSelectedMember(member)
+    setIsModalOpen(true)
+    document.body.style.overflow = 'hidden' // Prevent background scrolling
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedMember(null)
+    document.body.style.overflow = 'unset' // Restore scrolling
+  }
+
+  // Close modal when clicking outside
+  const handleModalOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      closeModal()
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -211,6 +266,9 @@ export default function AboutPage() {
               </a>
               <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
+              </a>
+              <a href="/impact" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
+                Impact
               </a>
               <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
@@ -282,6 +340,12 @@ export default function AboutPage() {
                 Technology
               </a>
               <a
+                href="/impact"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Impact
+              </a>
+              <a
                 href="/career"
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
               >
@@ -327,10 +391,10 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto text-center mb-16">
             <p className="text-gray-300 text-lg leading-relaxed">
               Established in 2023, Khageshvara Aviation Technology Private Limited is at the forefront of innovation in
-              aerial mobility. Our focus lies in developing cutting-edge Electric Vertical Take-Off and Landing (E-VTOL)
-              solutions. Committed to revolutionizing air travel, we combine state-of-the-art technology with a passion
-              for sustainability. At Khageshvara Aviation, we aspire to redefine the future of transportation, creating
-              a world where efficient and eco-friendly aerial mobility is accessible to all.
+              Aerial Mobility. Our focus lies in developing cutting-edge Electric Vertical Take-Off and Landing (E-VTOL)
+              solutions. Committed to revolutionizing air travel, we combine state-of-the-art Technology with a passion
+              for Sustainability. At Khageshvara Aviation, we aspire to redefine the future of transportation, creating
+              a world where efficient and eco-friendly Aerial Mobility is accessible to all.
             </p>
           </div>
         </div>
@@ -358,16 +422,16 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="flex gap-8">
             {/* Column 1 - Slow Speed */}
-            <ParallaxColumn members={teamMembers.column1} speed={0.6} columnIndex={1} />
+            <ParallaxColumn members={teamMembers.column1} speed={0.6} columnIndex={1} onMemberClick={handleMemberClick} />
 
             {/* Column 2 - Fast Speed */}
-            <ParallaxColumn members={teamMembers.column2} speed={1.2} columnIndex={2} />
+            <ParallaxColumn members={teamMembers.column2} speed={1.2} columnIndex={2} onMemberClick={handleMemberClick} />
 
             {/* Column 3 - Slow Speed */}
-            <ParallaxColumn members={teamMembers.column3} speed={0.6} columnIndex={3} />
+            <ParallaxColumn members={teamMembers.column3} speed={0.6} columnIndex={3} onMemberClick={handleMemberClick} />
 
             {/* Column 4 - Fast Speed */}
-            <ParallaxColumn members={teamMembers.column4} speed={1.2} columnIndex={4} />
+            <ParallaxColumn members={teamMembers.column4} speed={1.2} columnIndex={4} onMemberClick={handleMemberClick} />
           </div>
         </div>
       </section>
@@ -416,12 +480,91 @@ export default function AboutPage() {
               console.log("Ordered Members:", orderedMembers);
 
               return orderedMembers.map((member, index) => (
-                <TeamCard key={`mobile-${member.name}-${index}`} member={member} index={index} />
+                <TeamCard key={`mobile-${member.name}-${index}`} member={member} index={index} onMemberClick={handleMemberClick} />
               ))
             })()}
           </div>
         </div>
       </section>
+
+      {/* Team Member Modal */}
+      {isModalOpen && selectedMember && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={handleModalOverlayClick}
+        >
+          <div className="relative bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 max-w-4xl w-full max-h-[90vh] overflow-hidden animate-modal-appear transform scale-100 hover:scale-[1.02] transition-transform duration-300">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-800/80 hover:bg-red-500/80 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+            >
+              <X className="w-5 h-5 text-white group-hover:text-white" />
+            </button>
+
+            <div className="grid md:grid-cols-2 gap-0 h-full">
+              {/* Left Side - Photo */}
+              <div className="relative aspect-square md:aspect-[4/5] bg-gradient-to-br from-gray-800 to-gray-900">
+                <Image
+                  src={selectedMember.image || "/placeholder.svg"}
+                  alt={selectedMember.name}
+                  fill
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  style={{
+                    objectPosition:
+                      selectedMember.name === "Satyam Jha"
+                        ? "center 20%"
+                        : selectedMember.name === "Tashif"
+                          ? "center 5%"
+                          : selectedMember.name === "Gaurav Sharma"
+                            ? "center 15%"
+                            : selectedMember.name === "Mathew George"
+                              ? "center 10%"
+                              : "center center",
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"></div>
+                
+                {/* Decorative Elements */}
+                <div className="absolute top-4 left-4 w-20 h-20 flex items-center justify-center">
+                  <img 
+                    src="/images/kat-logo-white.png" 
+                    alt="KAT Logo" 
+                    className="w-full h-full object-contain opacity-70 animate-pulse"
+                  />
+                </div>
+                <div className="absolute bottom-4 right-4 w-16 h-16 border border-yellow-400/20 rotate-45"></div>
+              </div>
+
+              {/* Right Side - Content */}
+              <div className="p-6 md:p-8 flex flex-col justify-center overflow-y-auto">
+                <div className="mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-yellow-400 mb-2 leading-tight">
+                    {selectedMember.name}
+                  </h2>
+                  <p className="text-lg md:text-xl text-gray-300 font-medium">
+                    {selectedMember.title}
+                  </p>
+                  <div className="w-16 h-1 bg-yellow-400 mt-3 rounded-full"></div>
+                </div>
+
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-gray-300 leading-relaxed text-base md:text-lg">
+                    {selectedMember.description}
+                  </p>
+                </div>
+
+                {/* Tagline at bottom */}
+                <div className="mt-6 pt-4 border-t border-gray-700/50">
+                  <p className="text-yellow-400/80 italic text-sm md:text-base">
+                    "{selectedMember.tagline}"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="py-12 border-t border-gray-800 bg-black">
@@ -482,6 +625,9 @@ export default function AboutPage() {
               </a>
               <a href="/technology" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Technology
+              </a>
+              <a href="/impact" className="text-white hover:text-yellow-400 transition-colors text-sm">
+                Impact
               </a>
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers

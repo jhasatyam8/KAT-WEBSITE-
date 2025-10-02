@@ -8,7 +8,7 @@ export default function HomePage() {
   const [currentView, setCurrentView] = useState<"mission" | "vision">("mission")
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [aircraftPosition, setAircraftPosition] = useState(1) // Start with mission position (right)
-  const [operationType, setOperationType] = useState<"cargo" | "defense">("defense")
+  const [operationType, setOperationType] = useState<"cargo" | "defence">("defence")
   const [distance, setDistance] = useState("0")
   const [payloadWeight, setPayloadWeight] = useState("0")
   const [missionType, setMissionType] = useState("ISR/Recon")
@@ -74,7 +74,7 @@ export default function HomePage() {
       fuelSaved = (distanceKm * 35) / 100
       convoyKmAvoided = distanceKm
     } else {
-      // For defense operations, calculations based on operation hours and equipment load
+      // For defence operations, calculations based on operation hours and equipment load
       const operationHours = value
       const equipmentLoad = weight
       
@@ -85,7 +85,7 @@ export default function HomePage() {
       
       // Fuel savings based on average helicopter consumption of 160L/hour
       fuelSaved = operationHours * 160
-      // For defense ops, convoy distance avoided is based on operation area coverage
+      // For defence ops, convoy distance avoided is based on operation area coverage
       convoyKmAvoided = operationHours * 50 // Assuming 50km coverage per hour
     }
 
@@ -130,6 +130,9 @@ export default function HomePage() {
               </a>
               <a href="/technology" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Technology
+              </a>
+              <a href="/impact" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
+                Impact
               </a>
               <a href="/career" className="hover:text-yellow-400 transition-all duration-300 font-medium px-4 py-2 rounded-lg border border-transparent hover:border-yellow-400/30 hover:bg-yellow-400/5">
                 Career
@@ -200,6 +203,12 @@ export default function HomePage() {
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
               >
                 Technology
+              </a>
+              <a
+                href="/impact"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Impact
               </a>
               <a
                 href="/career"
@@ -311,7 +320,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="bg-black rounded-2xl p-6 border border-yellow-400/30 shadow-2xl">
                     <p className="text-white text-base md:text-lg leading-relaxed font-light font-sans">
-                      Our mission to redefine the future of transportation with next-gen, safe, fast, and sustainable
+                      To redefine the future of transportation with next-gen, safe, fast, and sustainable
                       mobility solutions. Our commitment is encapsulated in our ethos:{" "}
                       <span className="text-yellow-300 font-semibold bg-yellow-400/10 px-2 py-1 rounded border border-yellow-400/50">
                         'Reaching the Unreachable,'
@@ -354,7 +363,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="bg-black rounded-2xl p-6 border border-blue-400/30 shadow-2xl">
                     <p className="text-white text-base md:text-lg leading-relaxed font-light font-sans">
-                      Our vision is to lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways,
+                      To lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways,
                       cutting aviation carbon emissions, and fostering sustainable growth:{" "}
                       <span className="text-blue-300 font-semibold bg-blue-400/10 px-2 py-1 rounded border border-blue-400/50 whitespace-nowrap inline-block">'the forefront of next-gen mobility'.</span>
                     </p>
@@ -532,287 +541,16 @@ export default function HomePage() {
           <div className="mb-12">
             <h2 className="text-4xl font-bold text-yellow-400 text-center mb-4">OUR MISSION</h2>
             <p className="text-gray-300 text-center leading-relaxed">
-              Our mission to redefine the future of transportation with next-gen, safe, fast, and sustainable mobility
+              To redefine the future of transportation with next-gen, safe, fast, and sustainable mobility
               solutions. Our commitment is encapsulated in our ethos: <span className="text-yellow-300 font-semibold">'Reaching the Unreachable'</span>, as we strive to access remote areas and serve underserved communities.
             </p>
           </div>
           <div>
             <h2 className="text-4xl font-bold text-blue-400 text-center mb-4">OUR VISION</h2>
             <p className="text-gray-300 text-center leading-relaxed">
-              Our vision is to lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways, cutting
+              To lead an eVTOL ecosystem transformation, turning skies into eco-friendly highways, cutting
               aviation carbon emissions, and fostering sustainable growth: <span className="text-blue-300 font-semibold">'the forefront of next-gen mobility'</span>.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Carbon Savings Calculator Section */}
-      <section id="carbon-calculator" className="py-12 relative bg-slate-800">
-        <div className="container mx-auto px-6 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className="text-4xl md:text-5xl font-black mb-4 font-sans">
-              <span className="text-white">CARBON SAVINGS</span>
-              <br />
-              <span className="text-yellow-500">CALCULATOR</span>
-            </h2>
-            <p className="text-gray-400 text-lg max-w-3xl mx-auto font-sans">
-              Discover how much carbon footprint you can save by switching to KAT's eVTOL
-              <br />
-              for cargo and defense operations.
-            </p>
-          </div>
-
-          {/* Calculator Interface */}
-          <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {/* Left Panel - Calculator Form */}
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/50">
-              <div className="space-y-4">
-                {/* Operation Type Toggle */}
-                <div>
-                  <label className="block text-white text-sm font-medium mb-3">Operation Type</label>
-                  <div className="flex bg-slate-600/50 rounded-lg p-1">
-                    <button
-                      onClick={() => setOperationType("defense")}
-                      className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-300 ${
-                        operationType === "defense"
-                          ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-black"
-                          : "text-gray-300 hover:text-white"
-                      }`}
-                    >
-                      Defense
-                    </button>
-                    <button
-                      onClick={() => setOperationType("cargo")}
-                      className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-300 ${
-                        operationType === "cargo"
-                          ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-black"
-                          : "text-gray-300 hover:text-white"
-                      }`}
-                    >
-                      Cargo
-                    </button>
-                  </div>
-                </div>
-
-                {operationType === "cargo" ? (
-                  <>
-                    {/* Distance Input */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Distance</label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={distance}
-                          onChange={(e) => setDistance(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
-                          placeholder="0"
-                        />
-                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                          km
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Payload Weight Input */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Cargo Weight</label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={payloadWeight}
-                          onChange={(e) => setPayloadWeight(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
-                          placeholder="0"
-                        />
-                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                          kg
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Cargo Type */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Cargo Type</label>
-                      <select
-                        value={missionType}
-                        onChange={(e) => setMissionType(e.target.value)}
-                        className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 border border-slate-500/50"
-                      >
-                        <option value="General">General Cargo</option>
-                        <option value="Medical">Medical Supplies</option>
-                        <option value="Perishable">Perishable Goods</option>
-                        <option value="Emergency">Emergency Supplies</option>
-                      </select>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* Mission Type Dropdown */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Mission Type</label>
-                      <select
-                        value={missionType}
-                        onChange={(e) => setMissionType(e.target.value)}
-                        className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 border border-slate-500/50"
-                      >
-                        <option value="ISR/Recon">ISR/Recon</option>
-                        <option value="Forward Resupply">Forward Resupply</option>
-                        <option value="CASEVAC/MEDEVAC">CASEVAC/MEDEVAC</option>
-                        <option value="SAR">Search & Rescue</option>
-                        <option value="Border Patrol">Border Patrol</option>
-                      </select>
-                    </div>
-
-                    {/* Operation Duration */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Operation Duration</label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={distance}
-                          onChange={(e) => setDistance(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
-                          placeholder="0"
-                        />
-                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                          hours
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Equipment Load */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-3">Equipment Load</label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={payloadWeight}
-                          onChange={(e) => setPayloadWeight(e.target.value)}
-                          className="w-full bg-slate-600/50 text-white rounded-lg py-2 px-4 pr-12 border border-slate-500/50"
-                          placeholder="0"
-                        />
-                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                          kg
-                        </span>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {/* Calculate Button */}
-                <button
-                  onClick={calculateCarbonSavings}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-lg py-3 px-6 font-bold text-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  Calculate Carbon Savings
-                </button>
-              </div>
-            </div>
-
-            {/* Right Panel - Results Display */}
-            <div className="space-y-4">
-              {/* Main CO2 Result */}
-              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/50">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-black text-sm font-bold">🌱</span>
-                  </div>
-                  <h3 className="text-white text-lg font-semibold">Carbon Savings Results</h3>
-                </div>
-                <div className="text-center">
-                  <div className="text-5xl font-black text-yellow-500 mb-2">{carbonResults.co2Saved} kg</div>
-                  <div className="text-gray-400 text-sm">CO₂ Saved</div>
-                </div>
-              </div>
-
-              {/* Secondary Metrics */}
-              {operationType === "cargo" ? (
-                // Cargo Operation Metrics
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
-                    <div className="text-gray-400 text-xs">Truck Fuel Saved</div>
-                  </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
-                    <div className="text-gray-400 text-xs">Truck km Reduced</div>
-                  </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.treesPlanted}</div>
-                    <div className="text-gray-400 text-xs">Trees Equivalent</div>
-                  </div>
-                </div>
-              ) : (
-                // Defense Operation Metrics
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.fuelSaved} L</div>
-                    <div className="text-gray-400 text-xs">Helicopter Fuel Saved</div>
-                  </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{carbonResults.convoyKmAvoided}</div>
-                    <div className="text-gray-400 text-xs">Area Coverage (km)</div>
-                  </div>
-                  <div className="bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 border border-slate-600/50 text-center">
-                    <div className="text-xl font-bold text-yellow-500 mb-1">{Math.round(carbonResults.katEmission / carbonResults.traditionalEmission * 100)}%</div>
-                    <div className="text-gray-400 text-xs">Energy Efficiency</div>
-                  </div>
-                </div>
-              )}
-
-              {/* Emission Comparison */}
-              <div className="bg-slate-700/50 backdrop-blur-sm rounded-2xl p-5 border border-slate-600/50">
-                <h4 className="text-white text-lg font-semibold mb-3 text-center">Emission Comparison</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-sm">
-                      {operationType === "cargo" ? "Traditional Truck:" : "Traditional Helicopter:"}
-                    </span>
-                    <span className="text-red-400 font-bold text-sm">{carbonResults.traditionalEmission} kg CO₂</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-sm">KAT eVTOL:</span>
-                    <span className="text-green-400 font-bold text-sm">{carbonResults.katEmission} kg CO₂</span>
-                  </div>
-                  <div className="mt-3 pt-2 border-t border-slate-600/50">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-300 text-sm">Reduction:</span>
-                      <span className="text-yellow-400 font-bold text-sm">
-                        {Math.round((1 - carbonResults.katEmission / carbonResults.traditionalEmission) * 100)}%
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* India's Flight Revolution Section */}
-  <section className="py-20 relative bg-[#121b24]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-10" style={{ marginBottom: '2rem' }}>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-sans leading-tight md:leading-none">
-              <span className="text-white block md:inline">INDIA'S FLIGHT</span>
-              <span className="text-yellow-500 block md:inline"> REVOLUTION</span>
-            </h2>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-full" style={{ maxWidth: '1700px' }}>
-              <video
-                className="w-full h-auto object-contain rounded-xl"
-                style={{ maxHeight: 'calc(100vh - 200px)' }}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              >
-                <source src="/Dark theme website video.mp4" type="video/mp4" />
-              </video>
-            </div>
           </div>
         </div>
       </section>
@@ -826,14 +564,14 @@ export default function HomePage() {
               <span className="text-yellow-500">CASES</span>
             </h2>
             <p className="text-gray-400 text-xl max-w-3xl mx-auto font-sans">
-              Discover how KAT's eVTOL technology transforms various industries
+              Discover how KAT's eVTOL Technology transforms various industries
             </p>
           </div>
 
           {/* Use Case Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {[
-              { id: "ambulance", label: "Air Ambulance" },
+              { id: "ambulance", label: "Medevac" },
               { id: "defence", label: "Border Defence" },
               { id: "cargo", label: "Cargo" },
               { id: "flood", label: "Flood Relief" },
@@ -861,6 +599,33 @@ export default function HomePage() {
                 />
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* India's Flight Revolution Section */}
+  <section className="py-20 relative bg-[#121b24]">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-10" style={{ marginBottom: '2rem' }}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-sans leading-tight md:leading-none">
+              <span className="text-white block md:inline">INDIA'S FLIGHT</span>
+              <span className="text-yellow-500 block md:inline"> REVOLUTION</span>
+            </h2>
+          </div>
+          <div className="flex justify-center">
+            <div className="w-full" style={{ maxWidth: '1700px' }}>
+              <video
+                className="w-full h-auto object-contain rounded-xl"
+                style={{ maxHeight: 'calc(100vh - 200px)' }}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src="/Dark theme website video.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </section>
@@ -1009,6 +774,9 @@ export default function HomePage() {
               </a>
               <a href="/technology" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Technology
+              </a>
+              <a href="/impact" className="text-white hover:text-yellow-400 transition-colors text-sm">
+                Impact
               </a>
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers
