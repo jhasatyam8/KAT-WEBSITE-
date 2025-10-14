@@ -77,22 +77,55 @@ export default function HomePage() {
     });
   }, []);
 
-  // Force video playback on mobile devices
+  // Force video playback on mobile devices with better detection
   useEffect(() => {
     const video = document.querySelector('#hero-video') as HTMLVideoElement;
-    if (video) {
-      // Attempt to play the video
+    if (!video) return;
+
+    // Set video attributes programmatically for better mobile support
+    video.setAttribute('playsinline', 'true');
+    video.setAttribute('webkit-playsinline', 'true');
+    video.setAttribute('muted', 'true');
+    video.muted = true; // Ensure muted state
+    video.playsInline = true;
+
+    // Load and play the video
+    const attemptPlay = () => {
+      video.load(); // Force reload
       const playPromise = video.play();
+      
       if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          // Auto-play was prevented, try again on user interaction
-          console.log('Video autoplay prevented:', error);
-          document.addEventListener('touchstart', () => {
-            video.play();
-          }, { once: true });
-        });
+        playPromise
+          .then(() => {
+            console.log('Video is playing successfully');
+          })
+          .catch(error => {
+            console.log('Video autoplay prevented:', error);
+            // Retry on any user interaction
+            const playOnInteraction = () => {
+              video.play().then(() => {
+                console.log('Video started after user interaction');
+              }).catch(e => console.log('Still failed:', e));
+            };
+            
+            document.addEventListener('touchstart', playOnInteraction, { once: true });
+            document.addEventListener('click', playOnInteraction, { once: true });
+            document.addEventListener('scroll', playOnInteraction, { once: true });
+          });
       }
-    }
+    };
+
+    // Try to play immediately
+    attemptPlay();
+
+    // Also try when video metadata is loaded
+    video.addEventListener('loadedmetadata', attemptPlay);
+    video.addEventListener('canplay', attemptPlay);
+
+    return () => {
+      video.removeEventListener('loadedmetadata', attemptPlay);
+      video.removeEventListener('canplay', attemptPlay);
+    };
   }, []);
 
   useEffect(() => {
@@ -295,13 +328,12 @@ export default function HomePage() {
       <section
         ref={heroRef}
         id="hero"
-        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center pt-24 md:pt-0"
-        style={{ overflow: 'visible' }}
+        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center pt-24 md:pt-0 overflow-hidden"
       >
 
 
         {/* Video Background */}
-        <div className="absolute inset-0 z-10" style={{ overflow: 'visible' }}>
+        <div className="absolute inset-0 z-10">
           <video
             id="hero-video"
             className="w-full h-full"
@@ -315,13 +347,13 @@ export default function HomePage() {
             loop
             muted
             playsInline
-            preload="auto"
-            webkit-playsinline="true"
-            x5-playsinline="true"
+            preload="metadata"
+            controls={false}
             disablePictureInPicture
+            disableRemotePlayback
           >
+            <source src="/next gen mobility website video.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
           {/* Gradient Overlay for better text visibility on mobile */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>

@@ -493,7 +493,7 @@ export default function AboutPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           onClick={handleModalOverlayClick}
         >
-          <div className="relative bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 max-w-4xl w-full max-h-[90vh] overflow-hidden animate-modal-appear transform scale-100 hover:scale-[1.02] transition-transform duration-300">
+          <div className="relative bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 max-w-4xl w-full max-h-[80vh] overflow-hidden animate-modal-appear">
             {/* Close Button */}
             <button
               onClick={closeModal}
@@ -502,14 +502,14 @@ export default function AboutPage() {
               <X className="w-5 h-5 text-white group-hover:text-white" />
             </button>
 
-            <div className="grid md:grid-cols-2 gap-0 h-full">
+            <div className="grid md:grid-cols-2 gap-0 h-full max-h-[80vh]">
               {/* Left Side - Photo */}
-              <div className="relative aspect-square md:aspect-[4/5] bg-gradient-to-br from-gray-800 to-gray-900">
+              <div className="relative h-64 md:h-auto bg-gradient-to-br from-gray-800 to-gray-900">
                 <Image
                   src={selectedMember.image || "/placeholder.svg"}
                   alt={selectedMember.name}
                   fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  className="object-cover"
                   style={{
                     objectPosition:
                       selectedMember.name === "Satyam Jha"
@@ -536,29 +536,31 @@ export default function AboutPage() {
                 <div className="absolute bottom-4 right-4 w-16 h-16 border border-yellow-400/20 rotate-45"></div>
               </div>
 
-              {/* Right Side - Content */}
-              <div className="p-6 md:p-8 flex flex-col justify-center overflow-y-auto">
-                <div className="mb-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-yellow-400 mb-2 leading-tight">
-                    {selectedMember.name}
-                  </h2>
-                  <p className="text-lg md:text-xl text-gray-300 font-medium">
-                    {selectedMember.title}
-                  </p>
-                  <div className="w-16 h-1 bg-yellow-400 mt-3 rounded-full"></div>
-                </div>
+              {/* Right Side - Content with Scrollable Area */}
+              <div className="flex flex-col h-full max-h-[80vh] md:max-h-full overflow-hidden">
+                <div className="p-6 md:p-8 overflow-y-auto" style={{ maxHeight: '100%' }}>
+                  <div className="mb-6">
+                    <h2 className="text-2xl md:text-3xl font-bold text-yellow-400 mb-2 leading-tight">
+                      {selectedMember.name}
+                    </h2>
+                    <p className="text-lg md:text-xl text-gray-300 font-medium">
+                      {selectedMember.title}
+                    </p>
+                    <div className="w-16 h-1 bg-yellow-400 mt-3 rounded-full"></div>
+                  </div>
 
-                <div className="prose prose-invert max-w-none">
-                  <p className="text-gray-300 leading-relaxed text-base md:text-lg">
-                    {selectedMember.description}
-                  </p>
-                </div>
+                  <div className="prose prose-invert max-w-none mb-6">
+                    <p className="text-gray-300 leading-relaxed text-base md:text-lg">
+                      {selectedMember.description}
+                    </p>
+                  </div>
 
-                {/* Tagline at bottom */}
-                <div className="mt-6 pt-4 border-t border-gray-700/50">
-                  <p className="text-yellow-400/80 italic text-sm md:text-base">
-                    "{selectedMember.tagline}"
-                  </p>
+                  {/* Tagline at bottom */}
+                  <div className="pt-4 border-t border-gray-700/50">
+                    <p className="text-yellow-400/80 italic text-sm md:text-base">
+                      "{selectedMember.tagline}"
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
