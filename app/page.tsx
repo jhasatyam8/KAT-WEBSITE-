@@ -1,9 +1,52 @@
 "use client"
 
+// Aircraft use case and TRL data
+const aircraftUseCases = [
+  {
+    id: 'k-vaayu',
+    name: 'K-Vaayu',
+    trl: 'TRL-5 (Prototype validated in relevant environment)',
+    useCases: [
+      'Point-to-point micro-logistics (5–10 kg): spares, samples, e-commerce/pharma.',
+      'Emergency medical: blood, vaccines, antivenom, AED kits to PHCs/CHCs.',
+      'Disaster relief: rapid drops to flood/landslide zones when roads are cut off.',
+      'Industrial campus ops: inter-plant parts movement at ports, refineries, mines.',
+      'Inspection & mapping: crop scouting, perimeter/roof/line inspections, photogrammetry.'
+    ]
+  },
+  {
+    id: 'k-rudra',
+    name: 'K-Rudra',
+    trl: 'TRL-4 (Subsystems validated; sub-scale flight tests)',
+    useCases: [
+      'Medium/heavy logistics (50–100 kg): defense resupply, remote site provisioning.',
+      'HADR missions: food/water/medicine lift to isolated communities.',
+      'Security & ISR: persistent EO/IR patrols for border/coastal surveillance.',
+      'Infrastructure survey: rail/power/tower corridors, long-range LiDAR mapping (BVLOS).',
+      'Medevac concepts: stabilized casualty/organ-transport pods on designated corridors.'
+    ]
+  },
+  {
+    id: 'k-ospera',
+    name: 'K-Ospera',
+    trl: 'TRL-2 (Concept; 400 kg payload class)',
+    useCases: [
+      'Heavy logistics: 200–400 kg pallets (MRO spares, turbines, batteries) plant↔port↔warehouse.',
+      'Defense resupply: ammo, rations, water, field gensets to forward posts; convoy-risk reduction.',
+      'Medevac/CASEVAC: single-stretcher (+ attendant/equipment) or dual-litter pods; cold-chain organs.',
+      'Disaster/HADR airlift: shelters, telecom kits, water purifiers, portable bridges to cut-off areas.',
+      'Offshore & energy ops: last-mile to rigs/ships, coast-guard replenishment, heavy spares to remote substations.'
+    ]
+  }
+];
+
+// Modal state for aircraft use cases will be inside the component
 import { useState, useEffect, useRef } from "react"
 import { ChevronDown, ChevronLeft, ChevronRight, Instagram, Mail, Linkedin, Calculator } from "lucide-react"
 
 export default function HomePage() {
+  // Modal state for aircraft use cases
+  const [openUseCase, setOpenUseCase] = useState<string | null>(null);
   const [scrollY, setScrollY] = useState(0)
   const [currentView, setCurrentView] = useState<"mission" | "vision">("mission")
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -23,7 +66,7 @@ export default function HomePage() {
   })
   const heroRef = useRef<HTMLElement>(null)
   const missionVisionRef = useRef<HTMLElement>(null)
-  const [activeUseCase, setActiveUseCase] = useState<string | null>(null)
+  const [activeUseCase, setActiveUseCase] = useState<string | null>("ambulance")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -225,7 +268,7 @@ export default function HomePage() {
       <section
         ref={heroRef}
         id="hero"
-        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-0"
       >
 
 
@@ -286,9 +329,9 @@ export default function HomePage() {
           {/* Ambient Lighting */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
 
-          {/* Cinematic Glow Effects */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-400/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+          {/* Cinematic Glow Effects - Reduced */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/2 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-400/2 rounded-full blur-2xl animate-pulse delay-1000"></div>
         </div>
 
         {/* Interactive Layout Container */}
@@ -376,9 +419,10 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-l from-blue-400/10 via-transparent to-transparent opacity-50"></div>
           </div>
 
-          {/* Central eVTOL Aircraft with Enhanced Movement */}
+
+          {/* Central eVTOL Aircraft with Enhanced Movement + Usecase Buttons */}
           <div
-            className="absolute left-1/2 transform -translate-x-1/2 transition-all duration-3000 ease-out z-20"
+            className="absolute left-1/2 transform -translate-x-1/2 transition-all duration-3000 ease-out z-20 flex flex-col items-center"
             style={{
               top: "50%",
               transform: `translate(${aircraftPosition === -1 ? "-25%" : aircraftPosition === 1 ? "75%" : "50%"}, -50%) 
@@ -388,20 +432,20 @@ export default function HomePage() {
               transformStyle: "preserve-3d",
             }}
           >
-            {/* Enhanced Glow Effects that follow aircraft */}
+            {/* Enhanced Glow Effects - Reduced opacity */}
             <div
               className="absolute inset-0 blur-3xl scale-150 animate-pulse transition-all duration-3000"
               style={{
                 background:
                   aircraftPosition === -1
-                    ? "radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, rgba(96, 165, 250, 0.1) 50%, transparent 100%)"
+                    ? "radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, rgba(96, 165, 250, 0.03) 50%, transparent 100%)"
                     : aircraftPosition === 1
-                      ? "radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 50%, transparent 100%)"
-                      : "radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 215, 0, 0.2) 100%)",
+                      ? "radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.03) 50%, transparent 100%)"
+                      : "radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 215, 0, 0.05) 100%)",
               }}
             ></div>
 
-            <div className="absolute inset-0 bg-yellow-400/20 blur-2xl scale-125 animate-pulse delay-500"></div>
+            <div className="absolute inset-0 bg-yellow-400/5 blur-2xl scale-125 animate-pulse delay-500"></div>
 
             {/* 3D eVTOL Aircraft with Parallax */}
             <div className="relative z-10 group">
@@ -439,29 +483,46 @@ export default function HomePage() {
               ></div>
             </div>
 
-            {/* Dynamic Glowing Trail that follows aircraft */}
+            {/* Dynamic Glowing Trail - Hidden/Minimal */}
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-y-1/2 h-2 transition-all duration-3000 ease-out"
+              className="absolute top-1/2 left-1/2 transform -translate-y-1/2 h-1 transition-all duration-3000 ease-out opacity-0"
               style={{
-                width: aircraftPosition !== 0 ? "300px" : "60px",
-                background:
-                  aircraftPosition === -1
-                    ? "linear-gradient(270deg, rgba(96, 165, 250, 0.9) 0%, rgba(96, 165, 250, 0.5) 30%, transparent 100%)"
-                    : aircraftPosition === 1
-                      ? "linear-gradient(90deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 215, 0, 0.5) 30%, transparent 100%)"
-                      : "linear-gradient(90deg, rgba(255, 215, 0, 0.6) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 215, 0, 0.6) 100%)",
+                width: aircraftPosition !== 0 ? "20px" : "10px",
+                background: "transparent",
                 transform: "translateX(-50%)",
-                boxShadow: `0 0 40px ${
-                  aircraftPosition === -1
-                    ? "rgba(96, 165, 250, 0.8)"
-                    : aircraftPosition === 1
-                      ? "rgba(255, 215, 0, 0.8)"
-                      : "rgba(255, 215, 0, 0.4)"
-                }`,
                 borderRadius: "50px",
               }}
             ></div>
           </div>
+
+          {/* Usecase Modal */}
+          {openUseCase && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+              <div className="bg-gray-900 rounded-2xl p-8 max-w-lg w-full border-2 border-yellow-500 relative">
+                <button
+                  className="absolute top-3 right-3 text-yellow-400 hover:text-yellow-200 text-2xl font-bold"
+                  onClick={() => setOpenUseCase(null)}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                {(() => {
+                  const ac = aircraftUseCases.find(a => a.id === openUseCase);
+                  if (!ac) return null;
+                  return (
+                    <>
+                      <h2 className="text-2xl font-bold text-yellow-400 mb-2">{ac.name} <span className="text-gray-400 text-base font-normal">— {ac.trl}</span></h2>
+                      <ol className="list-decimal pl-5 text-gray-200 space-y-2">
+                        {ac.useCases.map((uc, idx) => (
+                          <li key={idx}>{uc}</li>
+                        ))}
+                      </ol>
+                    </>
+                  );
+                })()}
+              </div>
+            </div>
+          )}
 
           {/* Navigation Controls */}
           <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-8 z-30">
@@ -556,49 +617,56 @@ export default function HomePage() {
       </section>
 
       {/* Use Cases Section */}
-      <section id="use-cases" className="py-20 relative bg-black">
+      <section id="use-cases" className="py-12 relative bg-black min-h-screen flex items-center">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 font-sans">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 font-sans">
               <span className="text-white">USE </span>
               <span className="text-yellow-500">CASES</span>
             </h2>
-            <p className="text-gray-400 text-xl max-w-3xl mx-auto font-sans">
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto font-sans">
               Discover how KAT's eVTOL Technology transforms various industries
             </p>
           </div>
 
-          {/* Use Case Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {[
-              { id: "ambulance", label: "Medevac" },
-              { id: "defence", label: "Border Defence" },
-              { id: "cargo", label: "Cargo" },
-              { id: "flood", label: "Flood Relief" },
-            ].map((useCase) => (
-              <button
-                key={useCase.id}
-                onClick={() => setActiveUseCase(activeUseCase === useCase.id ? null : useCase.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                  activeUseCase === useCase.id ? "bg-yellow-500 text-black" : "bg-gray-800 text-white hover:bg-gray-700"
-                }`}
-              >
-                {useCase.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Use Case Display */}
-          <div className="max-w-4xl mx-auto">
-            {activeUseCase && (
-              <div className="bg-gray-900 rounded-2xl p-8 border border-gray-700">
-                <img
-                  src={`/images/use-cases/${activeUseCase}.png`}
-                  alt={`${activeUseCase} use case`}
-                  className="w-full h-auto max-h-96 md:max-h-[500px] object-cover rounded-lg mb-6"
-                />
+          {/* Use Case Layout - Buttons Left, Image Right */}
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
+              {/* Use Case Buttons - Vertical on Left */}
+              <div className="flex flex-col gap-4 w-full lg:w-auto">
+                {[
+                  { id: "ambulance", label: "Medevac" },
+                  { id: "defence", label: "Border Defence" },
+                  { id: "cargo", label: "Cargo" },
+                  { id: "flood", label: "Flood Relief" },
+                ].map((useCase) => (
+                  <button
+                    key={useCase.id}
+                    onClick={() => setActiveUseCase(useCase.id)}
+                    className={`px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 text-left whitespace-nowrap ${
+                      activeUseCase === useCase.id 
+                        ? "bg-yellow-500 text-black shadow-lg shadow-yellow-500/30" 
+                        : "bg-gray-800 text-white hover:bg-gray-700 hover:border-yellow-400/30 border border-transparent"
+                    }`}
+                  >
+                    {useCase.label}
+                  </button>
+                ))}
               </div>
-            )}
+
+              {/* Use Case Display - Right Side (40-45% width) */}
+              <div className="w-full lg:w-[45%] flex items-center justify-center">
+                {activeUseCase && (
+                  <div className="bg-gray-900 rounded-2xl p-6 border border-gray-700 animate-fade-in w-full">
+                    <img
+                      src={`/images/use-cases/${activeUseCase}.png`}
+                      alt={`${activeUseCase} use case`}
+                      className="w-full h-auto max-h-[400px] object-contain rounded-lg"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -297,11 +297,18 @@ export default function CareerPage() {
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers
               </a>
-
               {/* Social Media Icons */}
               <div className="flex items-center space-x-4 pt-4">
-                <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
-                <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
+                <a
+                  href="https://www.linkedin.com/company/khageshvara-aviation-technology-pvt-ltd-k-a-t/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
+                </a>
+                <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
+                  <Instagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors" />
+                </a>
               </div>
             </div>
           </div>

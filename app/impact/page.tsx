@@ -495,7 +495,6 @@ export default function ImpactPage() {
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers
               </a>
-
               {/* Social Media Icons */}
               <div className="flex items-center space-x-4 pt-4">
                 <a

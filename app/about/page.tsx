@@ -7,18 +7,18 @@ import { Instagram, Mail, Linkedin, X } from "lucide-react"
 const teamMembers = {
   column1: [
     {
-      name: "Vedansh Agrawal",
+      name: "Vedansh Aggarwal",
       title: "Business Development Lead",
       tagline: "Scaling new heights",
       image: "/vedansh-aggrawal.png",
-      description: "A diligent third-year Bachelor's student at BITS Pilani, serving as the Business Development Lead at Khageshvara Aviation Technology Private Limited. With a strategic mindset, he plays a crucial role in propelling company growth and cultivating essential partnerships, showcasing exemplary leadership and business acumen. His responsibilities include securing startup funding, ensuring the tech team has the right equipment, and developing the business and financial plan of the company.",
+      description: "I am a Fourth-year Bachelor's student at BITS Pilani and currently lead Business Development. With prior experience at VC firms, I bring a strategic approach to driving growth and building key partnerships. My responsibilities include securing funding and developing the company's business and financial plans.",
     },
     {
       name: "Satyam Jha",
       title: "Creative Content Associate",
       tagline: "Crafting visual stories",
       image: "/satyam-jha.png",
-      description: "I'm currently a student at BITS Pilani, and I also wear the hat of Creative Content Associate for the team. My role is to give our pioneering work its voice, shaping how we tell our story through words and visuals. I conceptualize, design, and develop all our creative and digital assets, from LinkedIn and Instagram posts to this website. I handle both the creative direction and technical execution of our digital presence, ensuring it's as engaging and innovative as our technology.",
+      description: "I am a student at BITS Pilani and serve as the Creative Content Associate for the team. I lead the creative direction and execution of our digital presence. My work includes conceptualizing and designing digital assets, managing social media content, and developing our website.",
     },
   ],
   column2: [
@@ -27,7 +27,7 @@ const teamMembers = {
       title: "Co-Founder",
       tagline: "Visionary behind the revolution",
       image: "/ritvik-yadav.png",
-      description: "In the tapestry of my life, aerospace has been a continuous thread, woven since childhood. Drones and UAVs were my youthful muses. Amid the intricate fabric of my engineering life, destiny led me to contribute to Uber Elevate's Air Taxi concept—a juncture that propelled me into a love affair with the skies, echoing the mythical journey of Khageshvara. My key roles are majorly designing and analyzing components of our EVTOL, along with parts procurement for the same.",
+      description: "I'm co-founder at Khageshvara Aviation Technology, with a master's degree from BITS Pilani. My professional journey began with learnings from Uber Elevate, where I contributed to the development of their Air Taxi concept. This was followed by projects at CSIR-NAL & DRDO-ADE labs followed by key supply chain roles at ITC and Yokohama. My current responsibilities include the design and analysis of our EVTOL's key components, with a strong focus on parts procurement and supply chain management.",
     },
     {
       name: "Ujjwal Kumar",
@@ -41,46 +41,46 @@ const teamMembers = {
       title: "Machine Learning & SLAM Lead",
       tagline: "Teaching machines to see",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gaurav-sharma-PhQPLK2oH6daLTW0AL5MjnaJENcnkc.jpeg",
-      description: "I am the Machine Learning and SLAM Lead, pioneering the technology that allows our systems to understand the environment. I develop the algorithms that enable our vehicles to perceive, map, and navigate autonomously with high precision.",
+      description: "I am pursuing a Bachelor's degree at VIT Vellore and serve as the Machine Learning and SLAM Lead. I develop algorithms that enable autonomous vehicles to perceive, map, and navigate their environment with high precision. I have been part of my college's aerospace team, contributing to hands-on projects in autonomous systems and robotics.",
     },
   ],
   column3: [
     {
-      name: "Swasti",
+      name: "Swasti Dubey",
       title: "Marketing & Content Lead",
       tagline: "Storytelling the future",
       image: "/swasti-dubey.jpeg",
       description: "As a Marketing and Content Lead, I assist in strategic decision-making and optimize operational processes. I analyze data to provide insights and handle multiple responsibilities with adaptability. I embody and promote the brand's values and possess in-depth product knowledge. I engage in public relations, actively promote the brand on social media, and represent the brand at events. I interact with customers, gather feedback, and generate leads, ensuring effective brand presence and loyalty.",
     },
     {
-      name: "Tashif",
+      name: "Tashif Sayed Ali",
       title: "Strategic Aeropropulsion Lead",
       tagline: "Defying gravity daily",
       image: "/tashif-ali-final.jpeg",
-      description: "As the Strategic Aeropropulsion Lead, I oversee the propulsion system design, ensuring both efficiency and regulatory compliance, while focusing on aeroacoustic modeling for noise reduction. I manage system integration, conduct performance testing, and continually optimize propulsion efficiency. Collaborating with engineering teams, I ensure seamless integration of propulsion and noise control systems. Additionally, I prepare detailed technical drawings, propulsion system specifications, and topographical maps to align with industry standards and customer requirements. I document noise reduction processes and testing outcomes comprehensively, providing critical insights to support ongoing and future projects.",
+      description: "I am pursuing my Bachelor's in Marine Engineering at IIT Roorkee, I serve as the Strategic Aeropropulsion Lead. My work focuses on propulsion system design, aeroacoustic modeling for noise reduction, and performance optimization. I manage system integration, testing, and technical documentation.",
     },
   ],
   column4: [
     {
-      name: "Shyandeep Das",
+      name: "Shayandeep Das",
       title: "Co-Founder",
       tagline: "Leading strategic vision",
       image: "/shayandeep-das.png",
-      description: "Shayandeep Das is one of K.A.T's co-founders. He is currently pursuing a Master's in Health Economics and Statistics at Oxford University and works as a Data Analyst. He was formerly a Board Member of a nonprofit. Passionate about machine learning and the electrification of drones, he now leads the business development and strategy of K.A.T. Let's together Reach the Unreachable.",
+      description: "I am co-founder at Khageshvara Aviation Technology, pursuing a Master's degree in Health Economics and Statistics from Oxford University, while completed my Bachelors from York University. My professional journey has included a consulting role at EY and serving as a Board Member of a nonprofit. My current responsibilities include business development and strategy.",
     },
     {
       name: "Madhav Menon",
       title: "Propulsion Team Lead",
       tagline: "Engineering propulsion excellence",
       image: "/madhav-menon.jpeg",
-      description: "As the Propulsion Team Lead, I am responsible for providing the necessary thrust and control for the EVTOL across all mission phases. I lead the design, development, and testing of various electro-mechanical systems essential to the propulsion system, ensuring reliable performance and mission success. This involves overseeing the creation and integration of advanced propulsion technologies to achieve precise control and efficiency throughout each stage of flight.",
+      description: "I did Bachelor's from BITS Pilani and pursued Master's from TU Munich. As the Propulsion Team Lead, I lead the design, development, and testing of electro-mechanical systems. My role involves overseeing the creation and integration of advanced propulsion technologies to achieve precise control throughout flight.",
     },
     {
       name: "Mathew George",
       title: "Wing and Tail Design Lead",
       tagline: "Perfecting aerodynamic excellence",
       image: "/mathew-george.jpeg",
-      description: "Mathew is a student at BITS Pilani and leads the design of our eVTOL's wing and tail systems. His work focuses on creating efficient, reliable, and aerodynamically sound designs that form the backbone of our aircraft's performance. By blending technical expertise with a sharp eye for detail, he ensures that every element of the wing and tail contributes to both stability and innovation in our aerial mobility solutions.",
+      description: "I am a student at BITS Pilani and RMIT. I lead the design of eVTOL's wing and tail systems. My focus is on creating aerodynamically efficient and structurally reliable designs that enhance stability and performance.",
     },
   ],
 }
@@ -632,7 +632,6 @@ export default function AboutPage() {
               <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-sm">
                 Careers
               </a>
-
               {/* Social Media Icons */}
               <div className="flex items-center space-x-4 pt-4">
                 <a

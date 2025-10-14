@@ -1,5 +1,39 @@
 ﻿"use client"
 
+// Use case and TRL info for each aircraft
+const aircraftUseCases = {
+  "K-VAAYU": {
+    trl: "TRL-5 (Prototype validated in relevant environment)",
+    useCases: [
+      "Point-to-point micro-logistics (5–10 kg): spares, samples, e-commerce/pharma.",
+      "Emergency medical: blood, vaccines, antivenom, AED kits to PHCs/CHCs.",
+      "Disaster relief: rapid drops to flood/landslide zones when roads are cut off.",
+      "Industrial campus ops: inter-plant parts movement at ports, refineries, mines.",
+      "Inspection & mapping: crop scouting, perimeter/roof/line inspections, photogrammetry."
+    ]
+  },
+  "K-RUDRA": {
+    trl: "TRL-4 (Subsystems validated; sub-scale flight tests)",
+    useCases: [
+      "Medium/heavy logistics (50–100 kg): defense resupply, remote site provisioning.",
+      "HADR missions: food/water/medicine lift to isolated communities.",
+      "Security & ISR: persistent EO/IR patrols for border/coastal surveillance.",
+      "Infrastructure survey: rail/power/tower corridors, long-range LiDAR mapping (BVLOS).",
+      "Medevac concepts: stabilized casualty/organ-transport pods on designated corridors."
+    ]
+  },
+  "K-OSPERA": {
+    trl: "TRL-2 (Concept; 400 kg payload class)",
+    useCases: [
+      "Heavy logistics: 200–400 kg pallets (MRO spares, turbines, batteries) plant↔port↔warehouse.",
+      "Defense resupply: ammo, rations, water, field gensets to forward posts; convoy-risk reduction.",
+      "Medevac/CASEVAC: single-stretcher (+ attendant/equipment) or dual-litter pods; cold-chain organs.",
+      "Disaster/HADR airlift: shelters, telecom kits, water purifiers, portable bridges to cut-off areas.",
+      "Offshore & energy ops: last-mile to rigs/ships, coast-guard replenishment, heavy spares to remote substations."
+    ]
+  }
+};
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, Instagram, Mail, Linkedin, X } from "lucide-react"
@@ -137,6 +171,8 @@ export default function TechnologyPage() {
   const [isVisible, setIsVisible] = useState({})
   const [expandedTech, setExpandedTech] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  // Modal state for aircraft use cases
+  const [openUseCase, setOpenUseCase] = useState<string | null>(null);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -381,7 +417,44 @@ export default function TechnologyPage() {
                           <p className="text-gray-400 text-sm">Altitude:</p>
                           <p className="text-white font-semibold">{aircraftData[aircraft as keyof typeof aircraftData].altitude}</p>
                         </div>
+                        {/* UseCase Button - Below Speed */}
+                        <div className="flex justify-start items-start">
+                          <button
+                            className="px-5 py-2 rounded-lg bg-yellow-500/70 text-black font-bold shadow hover:bg-yellow-400/80 transition-all border-2 border-yellow-600/70"
+                            onClick={() => setOpenUseCase(aircraft)}
+                          >
+                            UseCase
+                          </button>
+                        </div>
                       </div>
+      {/* Usecase Modal */}
+      {openUseCase && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-gray-900 rounded-2xl p-8 max-w-lg w-full border-2 border-yellow-500 relative">
+            <button
+              className="absolute top-3 right-3 text-yellow-400 hover:text-yellow-200 text-2xl font-bold"
+              onClick={() => setOpenUseCase(null)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            {(() => {
+              const ac = aircraftUseCases[openUseCase as keyof typeof aircraftUseCases];
+              if (!ac) return null;
+              return (
+                <>
+                  <h2 className="text-2xl font-bold text-yellow-400 mb-2">{openUseCase.replace("K-", "K-")} <span className="text-gray-400 text-base font-normal">— {ac.trl}</span></h2>
+                  <ol className="list-decimal pl-5 text-gray-200 space-y-2">
+                    {ac.useCases.map((uc: string, idx: number) => (
+                      <li key={idx}>{uc}</li>
+                    ))}
+                  </ol>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
                     </div>
                   )}
                 </div>
@@ -470,7 +543,8 @@ export default function TechnologyPage() {
                       alt={tech.title}
                       width={tech.imageSize}
                       height={tech.imageSize}
-                      className={`object-contain transition-all duration-500 filter brightness-110 hover:scale-105 ${tech.transform || ""}`}
+                      className="object-contain transition-all duration-500 filter brightness-110 hover:scale-105"
+                      style={tech.transform ? { transform: tech.transform } : {}}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
                   </div>
@@ -484,58 +558,55 @@ export default function TechnologyPage() {
       {/* Footer */}
       <footer className="bg-black border-t border-gray-800 py-12">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <img src="/images/kat-logo-white.png" alt="KAT Logo" width={40} height={40} />
-                <span className="text-xl font-bold">KAT</span>
-              </div>
-              <p className="text-gray-400">
-                Pioneering the future of aerial mobility with cutting-edge technology and innovative solutions.
-              </p>
+          <div className="grid md:grid-cols-4 gap-8 items-start">
+            {/* Logo */}
+            <div className="flex flex-col items-center md:items-start mb-8 md:mb-0">
+              <img src="/images/kat-logo-white.png" alt="KAT Logo" width={80} height={80} className="mb-2" />
+              <span className="text-xl font-bold text-yellow-400">K.A.T</span>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2">
-                <a href="/" className="text-gray-400 hover:text-yellow-400 transition-colors block">
-                  Home
-                </a>
-                <a href="/about" className="text-gray-400 hover:text-yellow-400 transition-colors block">
-                  About Us
-                </a>
-                <a href="/technology" className="text-gray-400 hover:text-yellow-400 transition-colors block">
-                  Technology
-                </a>
-                <a href="/impact" className="text-gray-400 hover:text-yellow-400 transition-colors block">
-                  Impact
-                </a>
-                <a href="/career" className="text-gray-400 hover:text-yellow-400 transition-colors block">
-                  Career
-                </a>
+            {/* Address/Contact */}
+            <div className="flex flex-col space-y-4 text-left">
+              <div className="flex items-start space-x-3">
+                <span className="text-yellow-400 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 12.414a8 8 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" /></svg>
+                </span>
+                <span className="text-white text-base">
+                  30, Green Avenue, Khatipura Road, Jharkhand Mod, Jaipur, 302012, Rajasthan.
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="text-yellow-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2zm10-10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zm0 10a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                </span>
+                <span className="text-white text-base">+91 89529 43460</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="text-yellow-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v4a4 4 0 01-8 0v-4" /></svg>
+                </span>
+                <span className="text-white text-base">khageshvaramobility@gmail.com</span>
               </div>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-              <div className="flex space-x-4">
-                <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
-                  <Instagram className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
-                </a>
-                <a href="mailto:khageshvaramobility@gmail.com">
-                  <Mail className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/khageshvara-aviation-technology-pvt-ltd-k-a-t/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="w-6 h-6 text-gray-400 hover:text-yellow-400 transition-colors" />
-                </a>
-              </div>
+            {/* Navigation */}
+            <div className="flex flex-col space-y-4 text-left">
+              <a href="/about" className="text-white hover:text-yellow-400 transition-colors text-base">About Us</a>
+              <a href="/technology" className="text-white hover:text-yellow-400 transition-colors text-base">Technology</a>
+              <a href="/impact" className="text-white hover:text-yellow-400 transition-colors text-base">Impact</a>
+              <a href="/career" className="text-white hover:text-yellow-400 transition-colors text-base">Careers</a>
+            </div>
+            {/* Social Icons */}
+            <div className="flex flex-row md:flex-col items-center md:items-end space-x-4 md:space-x-0 md:space-y-4 mt-4 md:mt-0">
+              <a href="https://www.linkedin.com/company/khageshvara-aviation-technology-pvt-ltd-k-a-t/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-6 h-6 text-yellow-400 hover:text-yellow-300 transition-colors" />
+              </a>
+              <a href="https://www.instagram.com/khageshvara/" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-6 h-6 text-yellow-400 hover:text-yellow-300 transition-colors" />
+              </a>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400">
-              © 2025 Khageshvara Aviation Technology. All rights reserved.
+          <div className="border-t border-gray-800 mt-8 pt-4 text-center">
+            <p className="text-gray-400 text-xs">
+              © 2025 Khageshvara Aviation Technology private limited, all rights reserved
             </p>
           </div>
         </div>
