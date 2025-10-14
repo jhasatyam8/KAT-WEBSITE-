@@ -304,20 +304,21 @@ export default function HomePage() {
         <div className="absolute inset-0 z-10" style={{ overflow: 'visible' }}>
           <video
             id="hero-video"
-            className="w-full h-[300px] md:h-[500px] lg:h-full"
+            className="w-full h-full"
             style={{ 
               objectFit: 'cover',
               width: '100%',
-              height: '100%'
+              height: '100%',
+              backgroundColor: '#000'
             }}
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            poster="/images/k50-evtol.png"
             webkit-playsinline="true"
             x5-playsinline="true"
+            disablePictureInPicture
           >
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
