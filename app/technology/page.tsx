@@ -296,6 +296,12 @@ export default function TechnologyPage() {
                 Technology
               </a>
               <a
+                href="/impact"
+                className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
+              >
+                Impact
+              </a>
+              <a
                 href="/career"
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
               >

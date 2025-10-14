@@ -68,6 +68,33 @@ export default function HomePage() {
   const missionVisionRef = useRef<HTMLElement>(null)
   const [activeUseCase, setActiveUseCase] = useState<string | null>("ambulance")
 
+  // Preload use case images for faster switching
+  useEffect(() => {
+    const useCaseImages = ["ambulance", "defence", "cargo", "flood"];
+    useCaseImages.forEach((useCase) => {
+      const img = new Image();
+      img.src = `/images/use-cases/${useCase}.png`;
+    });
+  }, []);
+
+  // Force video playback on mobile devices
+  useEffect(() => {
+    const video = document.querySelector('#hero-video') as HTMLVideoElement;
+    if (video) {
+      // Attempt to play the video
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Auto-play was prevented, try again on user interaction
+          console.log('Video autoplay prevented:', error);
+          document.addEventListener('touchstart', () => {
+            video.play();
+          }, { once: true });
+        });
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
@@ -268,24 +295,35 @@ export default function HomePage() {
       <section
         ref={heroRef}
         id="hero"
-        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-0"
+        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center pt-24 md:pt-0"
+        style={{ overflow: 'visible' }}
       >
 
 
         {/* Video Background */}
-        <div className="absolute inset-0 z-10">
+        <div className="absolute inset-0 z-10" style={{ overflow: 'visible' }}>
           <video
-            className="w-full h-[300px] md:h-[500px] lg:h-full object-contain md:object-cover"
+            id="hero-video"
+            className="w-full h-[300px] md:h-[500px] lg:h-full"
+            style={{ 
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%'
+            }}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
+            poster="/images/k50-evtol.png"
+            webkit-playsinline="true"
+            x5-playsinline="true"
           >
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
           </video>
           {/* Gradient Overlay for better text visibility on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>
         </div>
 
         {/* Bouncing Arrow */}
@@ -657,11 +695,12 @@ export default function HomePage() {
               {/* Use Case Display - Right Side (40-45% width) */}
               <div className="w-full lg:w-[45%] flex items-center justify-center">
                 {activeUseCase && (
-                  <div className="bg-gray-900 rounded-2xl p-6 border border-gray-700 animate-fade-in w-full">
+                  <div className="bg-gray-900 rounded-2xl p-6 border border-gray-700 w-full">
                     <img
                       src={`/images/use-cases/${activeUseCase}.png`}
                       alt={`${activeUseCase} use case`}
-                      className="w-full h-auto max-h-[400px] object-contain rounded-lg"
+                      className="w-full h-auto max-h-[400px] object-contain rounded-lg transition-opacity duration-150"
+                      loading="eager"
                     />
                   </div>
                 )}
