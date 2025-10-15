@@ -319,52 +319,60 @@ export default function HomePage() {
       <section
         ref={heroRef}
         id="hero"
-        className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center pt-24 md:pt-0 overflow-hidden"
+        className="relative w-full min-h-screen"
+        style={{ minHeight: '100vh' }}
       >
-
-        {/* Mobile Background Image - Show only on mobile */}
-        <div className="absolute inset-0 z-10 md:hidden">
+        {/* Mobile - Image Background */}
+        <div className="md:hidden absolute inset-0 bg-black">
           <img
             src="/images/k50-evtol.png"
-            alt="K50 eVTOL"
-            className="w-full h-full object-cover"
-            style={{ backgroundColor: '#000' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>
-        </div>
-
-        {/* Video Background - Show only on tablet and desktop */}
-        <div className="absolute inset-0 z-10 hidden md:block">
-          <video
-            id="hero-video"
-            className="w-full h-full"
-            style={{ 
-              objectFit: 'cover',
+            alt="K50 eVTOL Aircraft"
+            style={{
               width: '100%',
               height: '100%',
-              backgroundColor: '#000'
+              objectFit: 'cover',
+              display: 'block'
             }}
+            onError={(e) => {
+              console.error('Image failed to load');
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+        </div>
+        
+        {/* Desktop/Tablet - Video Background */}
+        <div className="hidden md:block absolute inset-0 bg-black">
+          <video
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
-            controls={false}
-            disablePictureInPicture
-            disableRemotePlayback
+            preload="auto"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block'
+            }}
+            onLoadedData={() => console.log('Video loaded successfully')}
+            onError={(e) => {
+              console.error('Video failed to load:', e);
+            }}
           >
-            <source src="/next gen mobility website video.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
-            <source src="/next gen mobility website video.mp4" type="video/mp4" />
+            <source src="/next%20gen%20mobility%20website%20video.mp4" type="video/mp4" />
+            <source src="/Dark%20theme%20website%20video.mp4" type="video/mp4" />
           </video>
-          {/* Gradient Overlay for better text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
         </div>
 
         {/* Bouncing Arrow */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-          <ChevronDown className="w-8 h-8 text-yellow-400" onClick={() => scrollToSection('mission-vision')} style={{ cursor: 'pointer' }} />
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-50">
+          <ChevronDown 
+            className="w-10 h-10 text-yellow-400 cursor-pointer hover:text-yellow-300" 
+            onClick={() => scrollToSection('mission-vision')}
+          />
         </div>
-
       </section>
 
       {/* Mission & Vision Section - Interactive Sliding Panels */}
