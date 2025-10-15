@@ -323,18 +323,18 @@ export default function HomePage() {
         style={{ minHeight: '100vh' }}
       >
         {/* Mobile - Image Background */}
-        <div className="md:hidden absolute inset-0 bg-black">
+        <div className="md:hidden absolute inset-0 bg-black flex items-center justify-center">
           <img
-            src="/images/k50-evtol.png"
-            alt="K50 eVTOL Aircraft"
+            src="/next%20gen%20mobility%20website%20video.gif"
+            alt="Next Gen Mobility"
             style={{
               width: '100%',
-              height: '100%',
-              objectFit: 'cover',
+              height: 'auto',
+              objectFit: 'contain',
               display: 'block'
             }}
             onError={(e) => {
-              console.error('Image failed to load');
+              console.error('GIF failed to load');
               e.currentTarget.style.display = 'none';
             }}
           />
