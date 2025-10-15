@@ -77,21 +77,24 @@ export default function HomePage() {
     });
   }, []);
 
-  // Force video playback on mobile devices with better detection
+  // Force video playback on desktop/tablet devices
   useEffect(() => {
+    // Only run on non-mobile devices (md breakpoint and up)
+    if (window.innerWidth < 768) return;
+
     const video = document.querySelector('#hero-video') as HTMLVideoElement;
     if (!video) return;
 
-    // Set video attributes programmatically for better mobile support
+    // Set video attributes programmatically for better support
     video.setAttribute('playsinline', 'true');
     video.setAttribute('webkit-playsinline', 'true');
     video.setAttribute('muted', 'true');
-    video.muted = true; // Ensure muted state
+    video.muted = true;
     video.playsInline = true;
 
     // Load and play the video
     const attemptPlay = () => {
-      video.load(); // Force reload
+      video.load();
       const playPromise = video.play();
       
       if (playPromise !== undefined) {
@@ -101,16 +104,6 @@ export default function HomePage() {
           })
           .catch(error => {
             console.log('Video autoplay prevented:', error);
-            // Retry on any user interaction
-            const playOnInteraction = () => {
-              video.play().then(() => {
-                console.log('Video started after user interaction');
-              }).catch(e => console.log('Still failed:', e));
-            };
-            
-            document.addEventListener('touchstart', playOnInteraction, { once: true });
-            document.addEventListener('click', playOnInteraction, { once: true });
-            document.addEventListener('scroll', playOnInteraction, { once: true });
           });
       }
     };
@@ -120,11 +113,9 @@ export default function HomePage() {
 
     // Also try when video metadata is loaded
     video.addEventListener('loadedmetadata', attemptPlay);
-    video.addEventListener('canplay', attemptPlay);
 
     return () => {
       video.removeEventListener('loadedmetadata', attemptPlay);
-      video.removeEventListener('canplay', attemptPlay);
     };
   }, []);
 
@@ -331,9 +322,19 @@ export default function HomePage() {
         className="relative min-h-[400px] md:min-h-[600px] lg:min-h-screen flex items-center justify-center pt-24 md:pt-0 overflow-hidden"
       >
 
+        {/* Mobile Background Image - Show only on mobile */}
+        <div className="absolute inset-0 z-10 md:hidden">
+          <img
+            src="/images/k50-evtol.png"
+            alt="K50 eVTOL"
+            className="w-full h-full object-cover"
+            style={{ backgroundColor: '#000' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>
+        </div>
 
-        {/* Video Background */}
-        <div className="absolute inset-0 z-10">
+        {/* Video Background - Show only on tablet and desktop */}
+        <div className="absolute inset-0 z-10 hidden md:block">
           <video
             id="hero-video"
             className="w-full h-full"
@@ -355,7 +356,7 @@ export default function HomePage() {
             <source src="/next gen mobility website video.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
             <source src="/next gen mobility website video.mp4" type="video/mp4" />
           </video>
-          {/* Gradient Overlay for better text visibility on mobile */}
+          {/* Gradient Overlay for better text visibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" style={{ pointerEvents: 'none' }}></div>
         </div>
 
