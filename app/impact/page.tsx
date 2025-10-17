@@ -141,7 +141,7 @@ export default function ImpactPage() {
                 : "max-h-0 opacity-0 pointer-events-none"
             }`}
           >
-            <div className="flex flex-col space-y-4 py-4">
+            <div className="flex flex-col space-y-4 py-4 bg-black/50 backdrop-blur-sm rounded-lg px-4">
               <a
                 href="/"
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
@@ -181,10 +181,10 @@ export default function ImpactPage() {
       <section className="pt-32 pb-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 break-words">
               ENVIRONMENTAL <span className="text-yellow-400">IMPACT</span>
             </h1>
-            <p className="text-gray-400 text-xl max-w-3xl mx-auto">
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto">
               Calculate the positive environmental impact of switching to KAT's sustainable eVTOL solutions
             </p>
           </div>

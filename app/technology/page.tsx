@@ -542,14 +542,18 @@ export default function TechnologyPage() {
                 </div>
 
                 {/* Image */}
-                <div className={`relative h-[400px] flex items-center justify-center ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-                  <div className="relative">
+                <div className={`relative h-[400px] md:h-[400px] flex items-center justify-center ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
+                  <div className="relative w-full flex items-center justify-center">
                     <Image
                       src={tech.image}
                       alt={tech.title}
                       width={tech.imageSize}
                       height={tech.imageSize}
-                      className="object-contain transition-all duration-500 filter brightness-110 hover:scale-105"
+                      className={`object-contain transition-all duration-500 filter brightness-110 hover:scale-105 ${
+                        tech.title === "Tilt Rotor System" || tech.title === "Coaxial Propulsion" 
+                          ? "w-full max-w-[2000px] md:max-w-none md:w-auto" 
+                          : ""
+                      }`}
                       style={tech.transform ? { transform: tech.transform } : {}}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>

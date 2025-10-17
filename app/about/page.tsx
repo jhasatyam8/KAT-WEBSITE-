@@ -537,8 +537,8 @@ export default function AboutPage() {
               </div>
 
               {/* Right Side - Content with Scrollable Area */}
-              <div className="flex flex-col h-full max-h-[80vh] md:max-h-full overflow-hidden">
-                <div className="p-6 md:p-8 overflow-y-auto" style={{ maxHeight: '100%' }}>
+              <div className="flex flex-col overflow-hidden h-64 md:h-auto">
+                <div className="p-6 md:p-8 overflow-y-auto overflow-x-hidden" style={{ maxHeight: '500px', WebkitOverflowScrolling: 'touch' }}>
                   <div className="mb-6">
                     <h2 className="text-2xl md:text-3xl font-bold text-yellow-400 mb-2 leading-tight">
                       {selectedMember.name}
