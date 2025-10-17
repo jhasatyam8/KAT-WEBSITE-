@@ -272,11 +272,11 @@ export default function TechnologyPage() {
           <div
             className={`md:hidden transition-all duration-300 ease-in-out ${
               isMobileMenuOpen
-                ? "max-h-64 opacity-100 mt-4"
+                ? "max-h-96 opacity-100 mt-4"
                 : "max-h-0 opacity-0 pointer-events-none"
             }`}
           >
-            <div className="flex flex-col space-y-4 py-4">
+            <div className="flex flex-col space-y-4 py-8 pb-10 bg-black/50 backdrop-blur-sm rounded-lg px-4">
               <a
                 href="/"
                 className="text-white hover:text-yellow-400 font-medium text-center hover:bg-yellow-400/10 py-2 rounded-lg transition-colors"
