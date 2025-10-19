@@ -735,13 +735,13 @@ export default function HomePage() {
               </div>
 
               {/* Use Case Display - Right Side (40-45% width) */}
-              <div className="w-full lg:w-[50%] flex items-center justify-center">
+              <div className="w-full lg:w-[60%] flex items-center justify-center">
                 {activeUseCase && (
                   <div className="bg-gray-900 rounded-2xl p-4 border border-gray-700/50 w-full">
                     <img
                       src={`/images/use-cases/${activeUseCase}.png`}
                       alt={`${activeUseCase} use case`}
-                      className="w-full h-auto max-h-[500px] object-contain rounded-lg transition-opacity duration-150"
+                      className="w-full h-auto max-h-[700px] object-contain rounded-lg transition-opacity duration-150"
                       loading="eager"
                     />
                   </div>

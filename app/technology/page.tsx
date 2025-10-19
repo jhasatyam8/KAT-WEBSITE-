@@ -79,7 +79,7 @@ const technologies = [
       "All-weather operation with redundant actuator systems"
     ],
     image: "/tilt-rotor.png",
-    imageSize: 600,
+    imageSize: 2000,
     transform: "rotate(-90deg)", // This rotates the image anticlockwise 90 degrees
     readMore:
       "The tilt rotor system integrates variable-pitch technology with precision actuators, enabling true VTOL capabilities across a broad 5–400 kg payload range. This design supports agile transition between hover and forward flight, essential for diverse operational profiles such as logistics, surveillance, or emergency response. With 20% thrust gain at 18% reduced power, this system significantly enhances flight performance and energy efficiency. Its redundancy features and tolerance to wind shear and turbulence ensure resilience in all-weather and high-demand environments, making it ideal for both civilian and defense-grade missions.",
@@ -96,7 +96,7 @@ const technologies = [
       "Auto-rotation redundancy for enhanced safety and mission reliability"
     ],
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/co-axial-6kjGtwyuxxYqYkFG8kh0J5kJi4vmIs.png",
-    imageSize: 600,
+    imageSize: 2000,
     readMore:
       "Single-axis coaxial propulsion leverages counter-rotating rotor pairs to deliver superior lift efficiency and in-flight stability, even in adverse conditions. This configuration minimizes yaw torque, allowing smoother control and enhanced safety during critical flight operations. Compared to traditional single-rotor layouts, it achieves up to 25% greater range while maintaining a compact form factor—ideal for naval or confined-space deployments. Additionally, its ability to autorotate in case of emergency adds a crucial layer of safety, significantly increasing mission reliability in both autonomous and piloted scenarios.",
   },
@@ -496,11 +496,11 @@ export default function TechnologyPage() {
             </p>
           </div>
 
-          <div className="space-y-20 max-w-7xl mx-auto">
+          <div className="space-y-2 md:space-y-6 max-w-7xl mx-auto">
             {technologies.map((tech, index) => (
               <div
                 key={tech.number}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
+                className={`grid lg:grid-cols-2 gap-0 md:gap-2 items-center ${
                   index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
                 }`}
               >
@@ -542,16 +542,20 @@ export default function TechnologyPage() {
                 </div>
 
                 {/* Image */}
-                <div className={`relative h-[400px] md:h-[400px] flex items-center justify-center ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-                  <div className="relative w-full flex items-center justify-center">
+                <div className={`relative flex items-center justify-center ${
+                  tech.title === "Tilt Rotor System" || tech.title === "Coaxial Propulsion"
+                    ? "h-[500px] md:h-[600px]"
+                    : "h-[300px] md:h-[400px]"
+                } ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={tech.image}
                       alt={tech.title}
                       width={tech.imageSize}
                       height={tech.imageSize}
                       className={`object-contain transition-all duration-500 filter brightness-110 hover:scale-105 ${
-                        tech.title === "Tilt Rotor System" || tech.title === "Coaxial Propulsion" 
-                          ? "w-full max-w-[2000px] md:max-w-none md:w-auto" 
+                        tech.title === "Tilt Rotor System" || tech.title === "Coaxial Propulsion"
+                          ? "scale-150 md:scale-125"
                           : ""
                       }`}
                       style={tech.transform ? { transform: tech.transform } : {}}
